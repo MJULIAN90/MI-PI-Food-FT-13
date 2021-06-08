@@ -21,16 +21,13 @@ const diets = [
 let addDiets = async () => {
   let db = await Diet.findAll();
 
-  if (db.length === 0) {
-    setTimeout(loadings, 1000);
-    function loadings() {
-      diets.map((e) => {
-        Diet.create({
-          Name: e,
-        });
-      });
-      console.log("diets loadings");
-    }
+  setTimeout(loadings, 1000);
+
+  function loadings() {
+    diets.map((e) => {
+      Diet.findOrCreate({ where: { Name: e } });
+    });
+    console.log("diets loadings");
   }
 };
 

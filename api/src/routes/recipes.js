@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
     let responseDb = await Recipe.findAll({ where: { Name: name } });
 
     let responseApi = await axios(
-      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=15`
+      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=9`
     );
 
     let filtro = responseApi.data.results;
