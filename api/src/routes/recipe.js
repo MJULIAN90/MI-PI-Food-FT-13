@@ -9,8 +9,6 @@ POST /recipe:
 - Crea una receta en la base de datos
 */
 
-//! falta cuando son varios diets como agregar pendiente hacer
-
 router.post("/", async (req, res) => {
   const {
     Name,
@@ -29,15 +27,15 @@ router.post("/", async (req, res) => {
     Paso_a_paso,
   };
 
-  let id_diet = await Diet.findAll({ where: { Name: diets } });
-
   let recipe_create = await Recipe.create({
     Id: uuidv4(),
     ...data_recipe,
   });
 
-  //? la verdad no se porque con setDiet no da y agregue una s y si da
-  await recipe_create.setDiets(id_diet);
+  diets.map(async (e) => {
+    let id_diet = await Diet.findAll({ where: { Name: e } });
+    await recipe_create.setDiets(id_diet);
+  });
 
   res.send("Recipe Created");
 });

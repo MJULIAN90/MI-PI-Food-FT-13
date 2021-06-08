@@ -16,13 +16,6 @@ const diets = [
   "dairyFree",
 ];
 
-/*
-? estas vienen?
-
-    ? 'dairyFree'
-    !veryHealthy": true,
-*/
-
 //? se guarda y carga y la proxima no carga y sigue el ciclo porque?
 
 let addDiets = async () => {
