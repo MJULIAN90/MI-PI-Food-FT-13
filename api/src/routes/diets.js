@@ -3,17 +3,18 @@ const router = Router();
 const { Diet } = require("../db");
 
 const diets = [
-  "glutenFree",
-  "Ketogenic",
-  "Vegetarian",
-  "Lacto-Vegetarian",
-  "Ovo-Vegetarian",
-  "Vegan",
-  "Pescetarian",
-  "Paleo",
-  "Primal",
-  "Whole30",
-  "dairyFree",
+  "gluten free",
+  "ketogenic",
+  "vegetarian",
+  "lacto vegetarian",
+  "ovo vegetarian",
+  "vegan",
+  "pescetarian",
+  "paleo",
+  "primal",
+  "whole30",
+  "dairy Free",
+  "paleolithic",
 ];
 
 let addDiets = async () => {

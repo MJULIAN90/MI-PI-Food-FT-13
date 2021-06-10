@@ -1,13 +1,10 @@
 import { GET_RECIPES } from "../Redux/Actios/Actios";
 import { useDispatch } from "react-redux";
 
-export default function LoaderRecipes() {
+export default async function LoaderRecipes() {
   const dispatch = useDispatch();
 
-  const loaderRecipes = async () => {
-    let payload = await GET_RECIPES();
-    return dispatch(payload);
-  };
+  let payload = await GET_RECIPES();
 
-  return loaderRecipes();
+  return dispatch(payload);
 }

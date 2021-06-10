@@ -2,6 +2,7 @@ let initialState = {
   recipes: [],
   diets: [],
   cache_data: [],
+  recipe_id: [],
 };
 
 // mirar otrar alternativa para no tener tantos casos por dieta
@@ -18,6 +19,13 @@ function rootReducer(state = initialState, actions) {
         ...state,
         diets: actions.payload,
       };
+
+    case "GET_BY_ID":
+      return {
+        ...state,
+        recipe_id: actions.payload,
+      };
+
     case "ORDENAR_BY_NAME_ASC":
       return {
         ...state,
@@ -49,14 +57,14 @@ function rootReducer(state = initialState, actions) {
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "GLUTENFREE");
+          return e.diets.find((e) => e === "glutenfree");
         }),
       };
     case "ORDER_BY_DIET_KETOGENIC":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "KETOGENIC");
+          return e.diets.find((e) => e === "ketogenic");
         }),
       };
 
@@ -64,63 +72,71 @@ function rootReducer(state = initialState, actions) {
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "VEGETARIAN");
+          return e.diets.find((e) => e === "vegetarian");
         }),
       };
     case "ORDER_BY_DIET_LACTO_VEGETARIAN":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "LACTO-VEGETARIAN");
+          return e.diets.find((e) => e === "lacto vegetarian");
         }),
       };
     case "ORDER_BY_DIET_OVO_VEGETARIAN":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "OVO-VEGETARIAN");
+          return e.diets.find((e) => e === "ovo vegetarian");
         }),
       };
     case "ORDER_BY_DIET_VEGAN":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "VEGAN");
+          return e.diets.find((e) => e === "vegan");
         }),
       };
     case "ORDER_BY_DIET_PESCETARIAN":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "PESCETARIAN");
+          return e.diets.find((e) => e === "pescetarian");
         }),
       };
     case "ORDER_BY_DIET_PALEO":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "PALEO");
+          return e.diets.find((e) => e === "paleo");
         }),
       };
     case "ORDER_BY_DIET_PRIMAL":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "PRIMAL");
+          return e.diets.find((e) => e === "primal");
         }),
       };
     case "ORDER_BY_DIET_WHOLE30":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "WHOLE30");
+          return e.diets.find((e) => e === "whole30");
         }),
       };
     case "ORDER_BY_DIET_DAIRYFREE":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "DAIRYFREE");
+          return e.diets.find((e) => e === "dairyfree");
+        }),
+      };
+
+    case "ORDER_BY_DIET_PALEOLITHIC":
+      return {
+        ...state,
+        cache_data: state.recipes.filter((e) => {
+          return e.diets.find((e) => e === "paleolithic");
         }),
       };
 

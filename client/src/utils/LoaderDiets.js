@@ -1,13 +1,10 @@
 import { GET_DIETS } from "../Redux/Actios/Actios";
 import { useDispatch } from "react-redux";
 
-export default function LoaderDiets() {
+export default async function LoaderDiets() {
   const dispatch = useDispatch();
 
-  const loaderDiets = async () => {
-    let payload = await GET_DIETS();
-    return dispatch(payload);
-  };
+  let payload = await GET_DIETS();
 
-  return loaderDiets();
+  return dispatch(payload);
 }

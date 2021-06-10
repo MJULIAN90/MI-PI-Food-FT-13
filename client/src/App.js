@@ -13,8 +13,8 @@ import LoaderDiets from "./utils/LoaderDiets";
 import LoaderRecipes from "./utils/LoaderRecipes";
 
 function App() {
-  LoaderRecipes();
   LoaderDiets();
+  LoaderRecipes();
 
   return (
     <React.Fragment>

@@ -2,19 +2,26 @@ import axios from "axios";
 
 export const GET_RECIPES = async () => {
   let data = await axios("http://localhost:3001/recipes");
-  console.log(data.data);
+
   return { type: "GET_RECIPES", payload: data.data };
 };
 
 export const GET_DIETS = async () => {
   let data = await axios("http://localhost:3001/diets");
-  console.log(data.data);
+
   return { type: "GET_DIETS", payload: data.data };
+};
+
+export const GET_BY_ID = async (idReceta) => {
+  let data = await axios(`http://localhost:3001/recipes/${idReceta}`);
+
+  return { type: "GET_BY_ID", payload: data.data };
 };
 
 export const ORDENAR_BY_NAME_ASC = () => {
   return { type: "ORDENAR_BY_NAME_ASC" };
 };
+
 export const ORDENAR_BY_NAME_DESC = () => {
   return { type: "ORDENAR_BY_NAME_DESC" };
 };
@@ -71,6 +78,6 @@ export const ORDER_BY_DIET_DAIRYFREE = () => {
   return { type: "ORDER_BY_DIET_DAIRYFREE" };
 };
 
-// aca por id
-//http://localhost:3001/recipes/:id
-//export const GET_BY_ID = () => {};
+export const ORDER_BY_DIET_PALEOLITHIC = () => {
+  return { type: "ORDER_BY_DIET_PALEOLITHIC" };
+};

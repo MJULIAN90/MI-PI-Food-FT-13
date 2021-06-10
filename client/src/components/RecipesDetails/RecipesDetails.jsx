@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import LoaderById from "../../utils/LoaderById";
+import { useSelector } from "react-redux";
 
-function RecipesDetails() {
+function RecipesDetails(props) {
+  //
+  const { match } = props;
+
+  let id = parseInt(match.params.id);
+  LoaderById(id);
+
+  //const state = useSelector((state) => state);
+  //let data = state.recipes.filter((e) => e.id === id);
   return (
     <div>
-      aca tendremoos los detalles
-      <p>
-        [ ] Los campos mostrados en la ruta principal para cada receta (imagen,
-        nombre, tipo de plato y tipo de dieta) [ ] Resumen del plato [ ]
-        Puntuación [ ] Nivel de "comida saludable" [ ] Paso a paso
-      </p>
+      aca detalles
+      <Link to="/Home">Volver</Link>
     </div>
   );
 }
 
 export default RecipesDetails;
+/* useEffect(() => {
+    
+  }, []); */
