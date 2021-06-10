@@ -9,9 +9,15 @@ import NavBar from "./components/NavBar/NavBar";
 import Recipes from "./components/Recipes/Recipes";
 import RecipesDetails from "./components/RecipesDetails/RecipesDetails";
 
+import LoaderDiets from "./utils/LoaderDiets";
+import LoaderRecipes from "./utils/LoaderRecipes";
+
 function App() {
+  LoaderRecipes();
+  LoaderDiets();
+
   return (
-    <React.Fragment className="App">
+    <React.Fragment>
       <Route exact path="/" component={Home} />
       <Route path="/Home" component={NavBar} />
       <Route exact path="/Home" component={Filters} />

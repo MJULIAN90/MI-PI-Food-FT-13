@@ -16,18 +16,14 @@ const diets = [
   "dairyFree",
 ];
 
-//? se guarda y carga y la proxima no carga y sigue el ciclo porque?
-
 let addDiets = async () => {
-  let db = await Diet.findAll();
-
   setTimeout(loadings, 1000);
 
   function loadings() {
     diets.map((e) => {
       Diet.findOrCreate({ where: { Name: e } });
     });
-    console.log("diets loadings");
+    console.log("Diets loadings");
   }
 };
 

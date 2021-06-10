@@ -7,18 +7,13 @@ const URL = "https://api.spoonacular.com/recipes/";
 const { Recipe } = require("../db");
 
 /* 
-
-todo-- ok listo todo solo cambiar las cantidades de peticion
-GET https://api.spoonacular.com/recipes/complexSearch
-
-Para los tipos de dieta deben tener en cuenta las propiedades vegetarian, vegan, glutenFree por un lado y también analizar las que se incluyan dentro de la propiedad diets
+todo-- ok , listo todo solo cambiar las cantidades de peticion
 
 GET /recipes?name="...":
 - Obtener un listado de las primeras 9 recetas que contengan la palabra ingresada como query parameter
 - Si no existe ninguna receta mostrar un mensaje adecuado
 */
 
-//todo-- cambiar number=15 * 100 en los dos if
 router.get("/", async (req, res) => {
   const { name } = req.query;
 
@@ -60,7 +55,6 @@ router.get("/", async (req, res) => {
 
     let total = responseDb.concat(info);
 
-    console.log("total ", total.length);
     if (total.length === 0) return res.send("No se encontraron coincidencias");
 
     if (responseDb.length === 0) return res.send(info.slice(0, 9));
@@ -72,22 +66,33 @@ router.get("/", async (req, res) => {
     let info = [];
 
     let responseApi = await axios(
-      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=15`
+      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=5`
     );
 
     responseApi.data.results.map((data) => {
-      const { title, diets, image, vegetarian, id } = data;
+      const { title, diets, image, vegetarian, id, spoonacularScore } = data;
+
+      if (vegetarian) {
+        let obj = {
+          id,
+          title,
+          image,
+          diets: [...diets, "vegeterian"],
+          spoonacularScore,
+        };
+
+        return info.push(obj);
+      }
 
       let obj = {
         id,
         image,
         title,
         diets,
-        vegetarian,
+        spoonacularScore,
       };
 
-      info.push(obj);
-      //console.log(obj);
+      return info.push(obj);
     });
 
     return res.send(info);
@@ -96,8 +101,6 @@ router.get("/", async (req, res) => {
 
 /* 
 todo -- todo listo creo
-
-GET https://api.spoonacular.com/recipes/{id}/information
 
 GET /recipes/{idReceta}:
 - Obtener el detalle de una receta en particular

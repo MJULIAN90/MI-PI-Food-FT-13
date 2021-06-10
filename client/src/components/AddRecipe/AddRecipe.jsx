@@ -2,14 +2,30 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+//!-----------------------------------------------
+/* pendiente que hacer con los botones para ver si puedes crear enviar alerta y a home
+ */
+
+//! pendiente hacer la validacion del formulario
+///! pendiente agregar varias dietas
+
 function AddRecipe() {
   const [food, setfood] = useState({
-    nombre: "",
-    Resumen_plato: "",
+    Name: "",
+    Resumen_del_plato: "",
     Puntuacion: "",
-    nivel_comida: "",
-    pasos: "",
+    Nivel_de_comida_saludable: "",
+    Paso_a_paso: "",
+    diets: [],
   });
+
+  function handleOnchange(e) {
+    setfood({
+      ...food,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   async function handleSumit(e) {
     e.preventDefault();
 
@@ -19,25 +35,18 @@ function AddRecipe() {
         method: "Post",
         data: food,
       });
+
+      alert(`PLATO ${food.Name} HA SIDO CREADO`);
     } catch (err) {
       alert("ERROR AL CREAR ");
     }
 
-    alert(`PLATO ${food.nombre} HA SIDO CREADO`);
-
     setfood({
-      nombre: "",
-      Resumen_plato: "",
+      Name: "",
+      Resumen_del_plato: "",
       Puntuacion: "",
-      nivel_comida: "",
-      pasos: "",
-    });
-  }
-
-  function handleOnchange(e) {
-    setfood({
-      ...food,
-      [e.target.name]: e.target.value,
+      Nivel_de_comida_saludable: "",
+      Paso_a_paso: "",
     });
   }
 
@@ -48,9 +57,9 @@ function AddRecipe() {
         <div>
           <label>Nombre Del Plato: </label>
           <input
-            name="name"
+            name="Name"
             type="text"
-            value={food.nombre}
+            value={food.Name}
             placeholder="Ingresa Nombre "
             onChange={handleOnchange}
           />
@@ -58,11 +67,11 @@ function AddRecipe() {
         <div>
           <label>Resumen Del Plato: </label>
           <textarea
-            name="resumen"
+            name="Resumen_del_plato"
             type="text"
             rows="10"
             cols="20"
-            value={food.Resumen_plato}
+            value={food.Resumen_del_plato}
             placeholder="Ingresa Resumen"
             onChange={handleOnchange}
           />
@@ -82,21 +91,24 @@ function AddRecipe() {
         <div>
           <label>Nivel de "comida saludable : </label>
           <input
-            name="nivel_comida"
+            name="Nivel_de_comida_saludable"
             type="number"
             max="100"
             min="1"
-            value={food.nivel_comida}
+            value={food.Nivel_de_comida_saludable}
             placeholder="Nivel de comida saludable"
             onChange={handleOnchange}
           />
         </div>
         <div>
           <label>Paso a paso": </label>
-          <input
-            name="Pasos"
+
+          <textarea
+            name="Paso_a_paso"
             type="text"
-            value={food.Pasos}
+            rows="10"
+            cols="20"
+            value={food.Paso_a_paso}
             placeholder="Paso a paso"
             onChange={handleOnchange}
           />
@@ -104,11 +116,11 @@ function AddRecipe() {
         <div>
           <label>Dietas</label>
         </div>
-        <button type="submit"> Crear</button>
+        <button type="submit">Crear</button>
       </form>
       <Link to="/Home">Volver </Link>
 
-      <button> Crear Nuevo Plato</button>
+      <button onClick={handleSumit}> Crear Nuevo Plato</button>
     </div>
   );
 }
