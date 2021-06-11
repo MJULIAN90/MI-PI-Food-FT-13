@@ -2,21 +2,41 @@ import axios from "axios";
 
 export const GET_RECIPES = async () => {
   let data = await axios("http://localhost:3001/recipes");
-
   return { type: "GET_RECIPES", payload: data.data };
 };
 
 export const GET_DIETS = async () => {
   let data = await axios("http://localhost:3001/diets");
-
   return { type: "GET_DIETS", payload: data.data };
 };
 
+/* 
+? revisar 
 export const GET_BY_ID = async (idReceta) => {
+  console.log(idReceta);
   let data = await axios(`http://localhost:3001/recipes/${idReceta}`);
-
+  console.log(data.data);
   return { type: "GET_BY_ID", payload: data.data };
+}; */
+
+export const GET_BY_ID = (idReceta) => {
+  return function (dispatch) {
+    return axios
+      .get(`http://localhost:3001/recipes/${idReceta}`)
+      .then((response) => {
+        dispatch({
+          type: "GET_BY_ID",
+          payload: response.data,
+        });
+      });
+  };
 };
+/* 
+export const RESTART_RECIPE_ID = () => {
+  return {
+    type: "RESTART_RECIPE_ID",
+  };
+}; */
 
 export const ORDENAR_BY_NAME_ASC = () => {
   return { type: "ORDENAR_BY_NAME_ASC" };

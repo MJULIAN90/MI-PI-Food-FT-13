@@ -1,26 +1,48 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import LoaderById from "../../utils/LoaderById";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { GET_BY_ID } from "../../Redux/Actios/Actios";
 
 function RecipesDetails(props) {
-  //
+  const state = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+
   const { match } = props;
 
   let id = parseInt(match.params.id);
-  LoaderById(id);
 
-  //const state = useSelector((state) => state);
-  //let data = state.recipes.filter((e) => e.id === id);
+  const { recipe_id } = state;
+
+  useEffect(() => {
+    dispatch(GET_BY_ID(id));
+  }, [dispatch, id]);
+
   return (
     <div>
-      aca detalles
+      {recipe_id ? (
+        <div>
+          <h2>{recipe_id.title}</h2>
+          <img src={recipe_id.img} alt="Error Loading" />
+          <h3>TIPOS DE PLATOS: </h3>
+          <p>{recipe_id.type_dish}</p>
+          <h3>TIPOS DE DIETAS:</h3>
+          <div>
+            <ul></ul>
+          </div>
+          <h3>RESUMEN :</h3>
+          <p>{recipe_id.summary}</p>
+          <h3>PUNTUACION : {recipe_id.Puntuation}</h3>
+          <h3>NIVEL DE COMIDA SALUDABLE : {recipe_id.lvl_healthScore}</h3>
+          <h3>PASO A PASO :</h3>
+          <p>{recipe_id.instructions} </p>
+        </div>
+      ) : (
+        <h1>Cargando ...</h1>
+      )}
       <Link to="/Home">Volver</Link>
     </div>
   );
 }
 
 export default RecipesDetails;
-/* useEffect(() => {
-    
-  }, []); */

@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-
-//!-----------------------------------------------
-/* pendiente que hacer con los botones para ver si puedes crear enviar alerta y a home
- */
+import { useSelector } from "react-redux";
 
 //! pendiente hacer la validacion del formulario
-///! pendiente agregar varias dietas
 
 function AddRecipe() {
+  const state = useSelector((state) => state);
+  const { diets } = state;
+
+  const history = useHistory();
+  const [Diets_list, setDiets_list] = useState([]);
+
   const [food, setfood] = useState({
     Name: "",
     Resumen_del_plato: "",
     Puntuacion: "",
     Nivel_de_comida_saludable: "",
     Paso_a_paso: "",
-    diets: [],
   });
 
   function handleOnchange(e) {
@@ -26,17 +27,30 @@ function AddRecipe() {
     });
   }
 
-  async function handleSumit(e) {
+  function diets_selecion() {
+    setDiets_list([]);
+  }
+  function handleChooseClick(e) {
+    let newlist = [...Diets_list];
+    newlist.push(e.target.id);
+    setDiets_list(newlist);
+  }
+
+  async function handleSumit(e, volver = true) {
     e.preventDefault();
+
+    let data = { ...food };
+    data.diets = Diets_list;
 
     try {
       await axios({
         url: "http://localhost:3001/recipe",
         method: "Post",
-        data: food,
+        data,
       });
 
       alert(`PLATO ${food.Name} HA SIDO CREADO`);
+      if (volver) history.push("/Home");
     } catch (err) {
       alert("ERROR AL CREAR ");
     }
@@ -48,6 +62,8 @@ function AddRecipe() {
       Nivel_de_comida_saludable: "",
       Paso_a_paso: "",
     });
+
+    setDiets_list([]);
   }
 
   return (
@@ -102,7 +118,6 @@ function AddRecipe() {
         </div>
         <div>
           <label>Paso a paso": </label>
-
           <textarea
             name="Paso_a_paso"
             type="text"
@@ -115,12 +130,26 @@ function AddRecipe() {
         </div>
         <div>
           <label>Dietas</label>
+          <div>
+            <ul>
+              {diets.map((e, i) => (
+                <div key={i} onClick={handleChooseClick} id={e}>
+                  {e}
+                </div>
+              ))}
+            </ul>
+          </div>
+          <button type="button" onClick={diets_selecion}>
+            Reset Selecion dietas
+          </button>
         </div>
-        <button type="submit">Crear</button>
+        <button type="submit">CREAR Y VOLVER</button>
+        <button type="button" onClick={(e) => handleSumit(e, false)}>
+          CREAR Y CREAR NUEVA
+        </button>
       </form>
-      <Link to="/Home">Volver </Link>
 
-      <button onClick={handleSumit}> Crear Nuevo Plato</button>
+      <Link to="/Home">Volver </Link>
     </div>
   );
 }

@@ -2,7 +2,7 @@ let initialState = {
   recipes: [],
   diets: [],
   cache_data: [],
-  recipe_id: [],
+  recipe_id: undefined,
 };
 
 // mirar otrar alternativa para no tener tantos casos por dieta
@@ -25,6 +25,12 @@ function rootReducer(state = initialState, actions) {
         ...state,
         recipe_id: actions.payload,
       };
+
+    /*  case "RESTART_RECIPE_ID":
+      return {
+        ...state,
+        recipe_id: undefined,
+      }; */
 
     case "ORDENAR_BY_NAME_ASC":
       return {
