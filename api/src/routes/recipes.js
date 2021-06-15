@@ -64,8 +64,10 @@ router.get("/", async (req, res) => {
   if (!name) {
     let info = [];
 
+    //! pendiente buscar en la db
+
     let responseApi = await axios(
-      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=2`
+      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=20`
     );
 
     responseApi.data.results.map((data) => {

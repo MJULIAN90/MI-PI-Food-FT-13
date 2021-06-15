@@ -2,10 +2,10 @@ let initialState = {
   recipes: [],
   diets: [],
   cache_data: [],
+  createByUser: [],
   recipe_id: undefined,
 };
 
-// mirar otrar alternativa para no tener tantos casos por dieta
 function rootReducer(state = initialState, actions) {
   switch (actions.type) {
     case "GET_RECIPES":
@@ -26,29 +26,26 @@ function rootReducer(state = initialState, actions) {
         recipe_id: actions.payload,
       };
 
-    /*  case "RESTART_RECIPE_ID":
-      return {
-        ...state,
-        recipe_id: undefined,
-      }; */
-
     case "ORDENAR_BY_NAME_ASC":
       return {
         ...state,
-        cache_data: state.recipes.sort((a, b) => (a.title > b.title ? 1 : -1)),
+        cache_data: actions.payload.sort((a, b) =>
+          a.title > b.title ? 1 : -1
+        ),
       };
 
     case "ORDENAR_BY_NAME_DESC":
-      //items.sort( (a, b) => (a.title < b.title) ? 1 : -1)
       return {
         ...state,
-        cache_data: state.recipes.sort((a, b) => (a.title < b.title ? 1 : -1)),
+        cache_data: actions.payload.sort((a, b) =>
+          a.title < b.title ? 1 : -1
+        ),
       };
 
     case "ORDENAR_BY_SCORE":
       return {
         ...state,
-        cache_data: state.recipes.sort((a, b) =>
+        cache_data: actions.payload.sort((a, b) =>
           a.spoonacularScore < b.spoonacularScore ? 1 : -1
         ),
       };
@@ -63,9 +60,10 @@ function rootReducer(state = initialState, actions) {
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "glutenfree");
+          return e.diets.find((e) => e === "gluten free");
         }),
       };
+    //! mirar si esta en dietas asi
     case "ORDER_BY_DIET_KETOGENIC":
       return {
         ...state,
@@ -78,21 +76,21 @@ function rootReducer(state = initialState, actions) {
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "vegetarian");
+          return e.diets.find((e) => e === "vegeterian");
         }),
       };
     case "ORDER_BY_DIET_LACTO_VEGETARIAN":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "lacto vegetarian");
+          return e.diets.find((e) => e.includes("lacto" && "vegetarian"));
         }),
       };
     case "ORDER_BY_DIET_OVO_VEGETARIAN":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "ovo vegetarian");
+          return e.diets.find((e) => e.includes("ovo vegetarian"));
         }),
       };
     case "ORDER_BY_DIET_VEGAN":
@@ -106,14 +104,14 @@ function rootReducer(state = initialState, actions) {
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "pescetarian");
+          return e.diets.find((e) => e === "pescatarian");
         }),
       };
     case "ORDER_BY_DIET_PALEO":
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "paleo");
+          return e.diets.find((e) => e.includes("paleo"));
         }),
       };
     case "ORDER_BY_DIET_PRIMAL":
@@ -123,6 +121,8 @@ function rootReducer(state = initialState, actions) {
           return e.diets.find((e) => e === "primal");
         }),
       };
+
+    //! mirar como estan los de whole
     case "ORDER_BY_DIET_WHOLE30":
       return {
         ...state,
@@ -134,7 +134,7 @@ function rootReducer(state = initialState, actions) {
       return {
         ...state,
         cache_data: state.recipes.filter((e) => {
-          return e.diets.find((e) => e === "dairyfree");
+          return e.diets.find((e) => e === "dairy free");
         }),
       };
 

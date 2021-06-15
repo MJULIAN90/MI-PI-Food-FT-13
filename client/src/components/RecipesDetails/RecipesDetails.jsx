@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { GET_BY_ID } from "../../Redux/Actios/Actios";
 
+//falta organizar lo de tipos de dietas
 function RecipesDetails(props) {
   const state = useSelector((state) => state);
 
@@ -28,7 +29,11 @@ function RecipesDetails(props) {
           <p>{recipe_id.type_dish}</p>
           <h3>TIPOS DE DIETAS:</h3>
           <div>
-            <ul></ul>
+            <ul>
+              {recipe_id.type_diet.map((e, i) => (
+                <li key={i}>{e} </li>
+              ))}
+            </ul>
           </div>
           <h3>RESUMEN :</h3>
           <p>{recipe_id.summary}</p>
