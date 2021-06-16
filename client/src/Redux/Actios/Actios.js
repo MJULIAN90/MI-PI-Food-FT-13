@@ -55,6 +55,14 @@ export const DELETE_FILTERS = () => {
   return { type: "DELETE_FILTERS" };
 };
 
+export const SEARCHED = (data) => {
+  return { type: "SEARCHED", payload: data };
+};
+
+export const DELETE_SEARCHED = () => {
+  return { type: "DELETE_SEARCHED" };
+};
+
 export const ORDER_BY_DIET_GLUTENFREE = (data) => {
   return { type: "ORDER_BY_DIET_GLUTENFREE", payload: data };
 };

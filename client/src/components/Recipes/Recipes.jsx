@@ -21,31 +21,29 @@ import {
   ORDER_BY_DIET_PALEOLITHIC,
 } from "../../Redux/Actios/Actios";
 
-// este para descongestionar tantoo texto
-//import Filter from "../Filter/Filter";
-
 function Recipes() {
   const state = useSelector((state) => state);
 
   const { recipes, cache_data } = state;
-
-  const [pagination, setpagination] = useState(0);
-
   const dispatch = useDispatch();
 
+  const [pagination, setpagination] = useState(0);
   const [entry_to_filter, setentry_to_filter] = useState("");
 
   let data = [...recipes];
-
   let data_cache = [...cache_data];
 
   const paginationRecipes = () => {
     if (entry_to_filter !== "") {
       if (data_cache.length > 0)
-        return data_cache.slice(pagination, pagination + 2);
-      // alert("no se encontraron alimentos con esta dieta");
+        return data_cache.slice(pagination, pagination + 1);
+
+      if (data_cache.length === 0) {
+        setentry_to_filter("");
+        alert("NO SE ENCONTRARON RECETAS CON ESTA DIETA");
+      }
     }
-    return data.slice(pagination, pagination + 2);
+    return data.slice(pagination, pagination + 1);
   };
 
   const filters = (e) => {
@@ -56,13 +54,11 @@ function Recipes() {
       }
 
       case "ordDes": {
-        setentry_to_filter("ok");
         setpagination(0);
         return dispatch(ORDENAR_BY_NAME_DESC(data));
       }
 
       case "ordScore": {
-        setentry_to_filter("ok");
         setpagination(0);
         return dispatch(ORDENAR_BY_SCORE(data));
       }
@@ -144,16 +140,17 @@ function Recipes() {
   };
 
   const nextPage = () => {
-    if (pagination < 90) setpagination(pagination + 2);
+    if (pagination < 9) setpagination(pagination + 1);
     console.log(pagination);
   };
 
   const prevPage = () => {
-    if (pagination > 0) setpagination(pagination - 2);
+    if (pagination > 0) setpagination(pagination - 1);
     console.log(pagination);
   };
 
   const resetFilter = () => {
+    setentry_to_filter("");
     return dispatch(DELETE_FILTERS());
   };
 
@@ -162,28 +159,28 @@ function Recipes() {
       case "1":
         return setpagination(0);
       case "2":
-        return setpagination(10);
+        return setpagination(1);
       case "3":
-        return setpagination(20);
+        return setpagination(2);
       case "4":
-        return setpagination(30);
+        return setpagination(3);
       case "5":
-        return setpagination(40);
+        return setpagination(4);
       case "6":
-        return setpagination(50);
+        return setpagination(5);
       case "7":
-        return setpagination(60);
+        return setpagination(6);
       case "8":
-        return setpagination(70);
+        return setpagination(7);
       case "9":
-        return setpagination(80);
+        return setpagination(8);
       case "10":
-        return setpagination(90);
+        return setpagination(9);
       default:
         break;
     }
   };
-
+  /* 
   let pagecount = Math.ceil(data_cache.length / 2);
 
   console.log(pagecount);
@@ -197,7 +194,7 @@ function Recipes() {
     }
   }
 
-  prueba();
+  prueba(); */
 
   return (
     <div>

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { GET_BY_ID } from "../../Redux/Actios/Actios";
 
 //falta organizar lo de tipos de dietas
-function RecipesDetails(props) {
+function RecipesDetailSearch(props) {
   const state = useSelector((state) => state);
 
   const dispatch = useDispatch();
@@ -18,6 +18,8 @@ function RecipesDetails(props) {
   useEffect(() => {
     dispatch(GET_BY_ID(id));
   }, [dispatch, id]);
+
+  console.log("aca estamosasdf");
 
   return (
     <div>
@@ -45,9 +47,9 @@ function RecipesDetails(props) {
       ) : (
         <h1>Cargando ...</h1>
       )}
-      <Link to="/Home">Volver A Home</Link>
+      <Link to="/Home/Search">Volver</Link>
     </div>
   );
 }
 
-export default RecipesDetails;
+export default RecipesDetailSearch;

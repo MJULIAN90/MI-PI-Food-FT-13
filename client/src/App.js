@@ -7,6 +7,8 @@ import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Recipes from "./components/Recipes/Recipes";
 import RecipesDetails from "./components/RecipesDetails/RecipesDetails";
+import RecipesDetailSearch from "./components/Search/RecipesDetailSearch";
+import Searched from "./components/Search/Searched";
 
 import LoaderDiets from "./utils/LoaderDiets";
 import LoaderRecipes from "./utils/LoaderRecipes";
@@ -22,6 +24,12 @@ function App() {
       <Route exact path="/Home" component={Recipes} />
       <Route exact path="/Home/AddRecipe" component={AddRecipe} />
       <Route exact path="/Home/Details/:id" component={RecipesDetails} />
+      <Route exact path="/Home/Search" component={Searched} />
+      <Route
+        exact
+        path="/Home/DetailSearch/:id"
+        component={RecipesDetailSearch}
+      />
     </React.Fragment>
   );
 }

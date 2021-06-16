@@ -3,6 +3,7 @@ let initialState = {
   diets: [],
   cache_data: [],
   createByUser: [],
+  searched: [],
   recipe_id: undefined,
 };
 
@@ -56,6 +57,17 @@ function rootReducer(state = initialState, actions) {
         cache_data: [],
       };
 
+    case "SEARCHED":
+      return {
+        ...state,
+        searched: actions.payload,
+      };
+
+    case "DELETE_SEARCHED":
+      return {
+        ...state,
+        searched: [],
+      };
     case "ORDER_BY_DIET_GLUTENFREE":
       return {
         ...state,
