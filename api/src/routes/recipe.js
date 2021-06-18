@@ -11,24 +11,26 @@ POST /recipe:
 
 router.post("/", async (req, res) => {
   const {
-    Name,
-    Resumen_del_plato,
-    Puntuacion,
-    Nivel_de_comida_saludable,
-    Paso_a_paso,
+    title,
+    summary,
+    Puntuation,
+    lvl_healthScore,
+    instructions,
     diets,
+    image,
   } = req.body;
 
   let data_recipe = {
-    Name,
-    Resumen_del_plato,
-    Puntuacion,
-    Nivel_de_comida_saludable,
-    Paso_a_paso,
+    title,
+    summary,
+    Puntuation,
+    lvl_healthScore,
+    instructions,
+    image,
   };
 
   let recipe_create = await Recipe.create({
-    Id: uuidv4(),
+    id: uuidv4(),
     ...data_recipe,
   });
 
@@ -37,7 +39,7 @@ router.post("/", async (req, res) => {
     await recipe_create.setDiets(id_diet);
   });
 
-  res.send("Recipe Created");
+  return res.send("Recipe Created");
 });
 
 module.exports = router;

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { DELETE_BY_ID } from "../../Redux/Actios/Actios";
 
 //! pendiente hacer la validacion del formulario
 
@@ -13,11 +14,12 @@ function AddRecipe() {
   const [Diets_list, setDiets_list] = useState([]);
 
   const [food, setfood] = useState({
-    Name: "",
-    Resumen_del_plato: "",
-    Puntuacion: "",
-    Nivel_de_comida_saludable: "",
-    Paso_a_paso: "",
+    title: "",
+    summary: "",
+    Puntuation: "",
+    lvl_healthScore: "",
+    instructions: "",
+    image: "",
   });
 
   function handleOnchange(e) {
@@ -49,18 +51,19 @@ function AddRecipe() {
         data,
       });
 
-      alert(`PLATO ${food.Name} HA SIDO CREADO`);
+      alert(`PLATO ${food.title} HA SIDO CREADO`);
       if (volver) history.push("/Home");
     } catch (err) {
       alert("ERROR AL CREAR ");
     }
 
     setfood({
-      Name: "",
-      Resumen_del_plato: "",
-      Puntuacion: "",
-      Nivel_de_comida_saludable: "",
-      Paso_a_paso: "",
+      title: "",
+      summary: "",
+      Puntuation: "",
+      lvl_healthScore: "",
+      instructions: "",
+      image: "",
     });
 
     setDiets_list([]);
@@ -73,9 +76,9 @@ function AddRecipe() {
         <div>
           <label>Nombre Del Plato: </label>
           <input
-            name="Name"
+            name="title"
             type="text"
-            value={food.Name}
+            value={food.title}
             placeholder="Ingresa Nombre "
             onChange={handleOnchange}
           />
@@ -83,11 +86,11 @@ function AddRecipe() {
         <div>
           <label>Resumen Del Plato: </label>
           <textarea
-            name="Resumen_del_plato"
+            name="summary"
             type="text"
             rows="10"
             cols="20"
-            value={food.Resumen_del_plato}
+            value={food.summary}
             placeholder="Ingresa Resumen"
             onChange={handleOnchange}
           />
@@ -95,11 +98,11 @@ function AddRecipe() {
         <div>
           <label>Puntuacion: </label>
           <input
-            name="Puntuacion"
+            name="Puntuation"
             type="number"
             max="10"
             min="1"
-            value={food.Puntuacion}
+            value={food.Puntuation}
             placeholder="Ingresa Puntuacion Del PLato 1 a 10"
             onChange={handleOnchange}
           />
@@ -107,11 +110,11 @@ function AddRecipe() {
         <div>
           <label>Nivel de "comida saludable : </label>
           <input
-            name="Nivel_de_comida_saludable"
+            name="lvl_healthScore"
             type="number"
             max="100"
             min="1"
-            value={food.Nivel_de_comida_saludable}
+            value={food.lvl_healthScore}
             placeholder="Nivel de comida saludable"
             onChange={handleOnchange}
           />
@@ -119,12 +122,22 @@ function AddRecipe() {
         <div>
           <label>Paso a paso": </label>
           <textarea
-            name="Paso_a_paso"
+            name="instructions"
             type="text"
             rows="10"
             cols="20"
-            value={food.Paso_a_paso}
+            value={food.instructions}
             placeholder="Paso a paso"
+            onChange={handleOnchange}
+          />
+        </div>
+        <div>
+          <label>Url de imagen: </label>
+          <textarea
+            name="image"
+            type="text"
+            value={food.image}
+            placeholder="Url"
             onChange={handleOnchange}
           />
         </div>
@@ -149,7 +162,9 @@ function AddRecipe() {
         </button>
       </form>
 
-      <Link to="/Home">Volver </Link>
+      <Link to="/Home" onClick={useDispatch(DELETE_BY_ID())}>
+        Volver{" "}
+      </Link>
     </div>
   );
 }

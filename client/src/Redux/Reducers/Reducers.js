@@ -1,10 +1,16 @@
+// cache data -- guardo los filtros de busqueda
+// createByUserDb -- guardar las recetas de la db creados anteriormente
+// searched-- los que busco en el buscador
+// recipe_id -- para guardar el de la id y lo renderizo
+
 let initialState = {
   recipes: [],
   diets: [],
   cache_data: [],
-  createByUser: [],
+  createByUserDb: [],
   searched: [],
   recipe_id: undefined,
+  favorites: [],
 };
 
 function rootReducer(state = initialState, actions) {
@@ -25,6 +31,24 @@ function rootReducer(state = initialState, actions) {
       return {
         ...state,
         recipe_id: actions.payload,
+      };
+
+    case "DELETE_BY_ID": {
+      return {
+        ...state,
+        recipe_id: undefined,
+      };
+    }
+    case "ADD_FAVORITES":
+      return {
+        ...state,
+        favorites: state.favorites.concat(actions.payload),
+      };
+
+    case "ADDED_BY_USER_DB":
+      return {
+        ...state,
+        createByUserDb: actions.payload,
       };
 
     case "ORDENAR_BY_NAME_ASC":

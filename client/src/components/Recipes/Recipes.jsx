@@ -141,16 +141,15 @@ function Recipes() {
 
   const nextPage = () => {
     if (pagination < 9) setpagination(pagination + 1);
-    console.log(pagination);
   };
 
   const prevPage = () => {
     if (pagination > 0) setpagination(pagination - 1);
-    console.log(pagination);
   };
 
   const resetFilter = () => {
     setentry_to_filter("");
+    setpagination(0);
     return dispatch(DELETE_FILTERS());
   };
 
@@ -180,21 +179,18 @@ function Recipes() {
         break;
     }
   };
-  /* 
-  let pagecount = Math.ceil(data_cache.length / 2);
 
-  console.log(pagecount);
+  let pagecount = Math.ceil(data_cache.length / 1);
 
   let array = [];
 
   function prueba() {
-    for (let i = 1; i < pagecount; i++) {
+    for (let i = 1; i <= pagecount; i++) {
       array.push(i);
-      console.log(array);
     }
   }
 
-  prueba(); */
+  prueba();
 
   return (
     <div>
@@ -267,61 +263,59 @@ function Recipes() {
           </div>
         </Link>
       ))}
+
       <div>
-        <button type="button" onClick={prevPage}>
-          {"Anterior"}
-        </button>
-        <button type="button" onClick={botones} id="1">
-          {"1"}
-        </button>
-        <button type="button" onClick={botones} id="2">
-          {"2"}
-        </button>
-        <button type="button" onClick={botones} id="3">
-          {"3"}
-        </button>
-        <button type="button" onClick={botones} id="4">
-          {"4"}
-        </button>
-        <button type="button" onClick={botones} id="5">
-          {"5"}
-        </button>
-        <button type="button" onClick={botones} id="6">
-          {"6"}
-        </button>
-        <button type="button" onClick={botones} id="7">
-          {"7"}
-        </button>
-        <button type="button" onClick={botones} id="8">
-          {"8"}
-        </button>
-        <button type="button" onClick={botones} id="9">
-          {"9"}
-        </button>
-        <button type="button" onClick={botones} id="10">
-          {"10"}
-        </button>
-        <button type="button" onClick={nextPage}>
-          {"Siguiente"}
-        </button>
+        {cache_data.length <= 0 ? (
+          <>
+            <button type="button" onClick={prevPage}>
+              {"Anterior"}
+            </button>
+            <button type="button" onClick={botones} id="1">
+              {"1"}
+            </button>
+            <button type="button" onClick={botones} id="2">
+              {"2"}
+            </button>
+            <button type="button" onClick={botones} id="3">
+              {"3"}
+            </button>
+            <button type="button" onClick={botones} id="4">
+              {"4"}
+            </button>
+            <button type="button" onClick={botones} id="5">
+              {"5"}
+            </button>
+            <button type="button" onClick={botones} id="6">
+              {"6"}
+            </button>
+            <button type="button" onClick={botones} id="7">
+              {"7"}
+            </button>
+            <button type="button" onClick={botones} id="8">
+              {"8"}
+            </button>
+            <button type="button" onClick={botones} id="9">
+              {"9"}
+            </button>
+            <button type="button" onClick={botones} id="10">
+              {"10"}
+            </button>
+            <button type="button" onClick={nextPage}>
+              {"Siguiente"}
+            </button>
+          </>
+        ) : (
+          <div>
+            {array.map((i) => (
+              <button type="button" onClick={botones} id={i} key={i}>
+                {i}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 export default Recipes;
-
-/*
- */
-
-/*      <div>
-        {array.length > 1 ? (
-          array.map((i) => (
-            <button type="button" onClick={botones} id={`d${i}`} key={i}>
-              {i}
-            </button>
-          ))
-        ) : (
-          <h1>n ohay nada</h1>
-        )}
-      </div> */

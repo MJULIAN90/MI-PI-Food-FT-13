@@ -15,7 +15,6 @@ function Search() {
     e.preventDefault();
 
     let value = refInput.current.value;
-    console.log();
 
     let data = await axios(
       `http://localhost:3001/recipes?name=${
@@ -24,8 +23,8 @@ function Search() {
     );
 
     refInput.current.value = "";
-    dispatch(SEARCHED(data));
-    console.log(data);
+    dispatch(SEARCHED(data.data));
+
     history.push("/Home/Search");
   }
   return (

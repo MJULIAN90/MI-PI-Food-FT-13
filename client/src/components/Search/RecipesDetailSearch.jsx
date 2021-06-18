@@ -11,7 +11,7 @@ function RecipesDetailSearch(props) {
 
   const { match } = props;
 
-  let id = parseInt(match.params.id);
+  let id = match.params.id;
 
   const { recipe_id } = state;
 
@@ -19,20 +19,18 @@ function RecipesDetailSearch(props) {
     dispatch(GET_BY_ID(id));
   }, [dispatch, id]);
 
-  console.log("aca estamosasdf");
-
   return (
     <div>
       {recipe_id ? (
         <div>
           <h2>{recipe_id.title}</h2>
-          <img src={recipe_id.img} alt="Error Loading" />
+          <img src={recipe_id.image} alt="Error Loading" />
           <h3>TIPOS DE PLATOS: </h3>
           <p>{recipe_id.type_dish}</p>
           <h3>TIPOS DE DIETAS:</h3>
           <div>
             <ul>
-              {recipe_id.type_diet.map((e, i) => (
+              {recipe_id.diets.map((e, i) => (
                 <li key={i}>{e} </li>
               ))}
             </ul>

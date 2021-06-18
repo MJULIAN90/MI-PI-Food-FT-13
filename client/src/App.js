@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 
 import "./App.css";
+import AddByUserDb from "./components/AddByUserDB/AddByUserDB";
 import AddRecipe from "./components/AddRecipe/AddRecipe";
 import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
@@ -30,6 +31,7 @@ function App() {
         path="/Home/DetailSearch/:id"
         component={RecipesDetailSearch}
       />
+      <Route exact path="/Home/DataBase" component={AddByUserDb} />
     </React.Fragment>
   );
 }

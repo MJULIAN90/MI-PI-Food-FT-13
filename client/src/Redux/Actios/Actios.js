@@ -10,22 +10,11 @@ export const GET_DIETS = async () => {
   return { type: "GET_DIETS", payload: data.data };
 };
 
-/* 
-? revisar 
-export const GET_BY_ID = async (idReceta) => {
-  let data = await axios(`http://localhost:3001/recipes/${idReceta}`);
-  return { type: "GET_BY_ID", payload: data.data };
-}; */
+export const ADDED_BY_USER_DB = async () => {
+  let data = await axios("http://localhost:3001/recipes/creates");
+  return { type: "ADDED_BY_USER_DB", payload: data.data };
+};
 
-//? que tiene de malo
-/*  export const GET_BY_ID = (idReceta) => {
-  console.log(idReceta);
-  axios(`http://localhost:3001/recipes/${idReceta}`).then((response) => {
-    console.log(response.data);
-    return { type: "GET_BY_ID", payload: response.data };
-  });
-}; 
- */
 export const GET_BY_ID = (idReceta) => {
   return function (dispatch) {
     return axios
@@ -37,6 +26,18 @@ export const GET_BY_ID = (idReceta) => {
         });
       });
   };
+};
+
+export const SEARCHED = (data) => {
+  return { type: "SEARCHED", payload: data };
+};
+
+export const ADD_FAVORITES = (data) => {
+  return { type: "ADD_FAVORITES", payload: data };
+};
+
+export const DELETE_BY_ID = () => {
+  return { type: "DELETE_BY_ID" };
 };
 
 export const ORDENAR_BY_NAME_ASC = (data) => {
@@ -53,10 +54,6 @@ export const ORDENAR_BY_SCORE = (data) => {
 
 export const DELETE_FILTERS = () => {
   return { type: "DELETE_FILTERS" };
-};
-
-export const SEARCHED = (data) => {
-  return { type: "SEARCHED", payload: data };
 };
 
 export const DELETE_SEARCHED = () => {

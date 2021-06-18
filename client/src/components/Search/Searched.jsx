@@ -7,12 +7,10 @@ function Searched() {
   const state = useSelector((state) => state.searched);
   const dispatch = useDispatch();
 
-  console.log("aca buscado ", state.data);
-
   return (
     <div>
       <div>
-        {state.data.map((data) => (
+        {state.map((data) => (
           <Link key={data.id} to={`/Home/DetailSearch/${data.id}`}>
             <div>
               <h3>{data.title}</h3>

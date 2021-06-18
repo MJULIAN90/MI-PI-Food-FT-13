@@ -2,21 +2,22 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define("recipe", {
-    Id: {
+    id: {
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
     },
-    Name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Resumen_del_plato: {
+    summary: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    Puntuacion: { type: DataTypes.INTEGER },
-    Nivel_de_comida_saludable: { type: DataTypes.INTEGER },
-    Paso_a_paso: { type: DataTypes.TEXT },
+    Puntuation: { type: DataTypes.INTEGER },
+    lvl_healthScore: { type: DataTypes.INTEGER },
+    instructions: { type: DataTypes.TEXT },
+    image: { type: DataTypes.TEXT },
   });
 };
