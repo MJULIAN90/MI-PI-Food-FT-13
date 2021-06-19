@@ -5,6 +5,7 @@ const router = Router();
 const axios = require("axios");
 const URL = "https://api.spoonacular.com/recipes/";
 const { Recipe, Diet } = require("../db");
+const { Op } = require("sequelize");
 
 /* 
 GET /recipes?name="...":
@@ -20,7 +21,11 @@ router.get("/", async (req, res) => {
     let db_array = [];
 
     let responseDb = await Recipe.findAll({
-      where: { title: name },
+      where: {
+        title: {
+          [Op.iLike]: name,
+        },
+      },
       include: [
         {
           model: Diet,
@@ -95,7 +100,10 @@ router.get("/", async (req, res) => {
 
     let total = db_array.concat(info);
 
-    if (total.length === 0) return res.send("No se encontraron coincidencias");
+    if (total.length === 0) {
+      console.log("no hay nada");
+      return res.send("No se encontraron coincidencias");
+    }
 
     if (db_array.length === 0) return res.send(info.slice(0, 9));
 
@@ -138,14 +146,6 @@ router.get("/", async (req, res) => {
     return res.send(info);
   }
 });
-
-/* 
-todo -- todo listo creo
-GET /recipes/{idReceta}:
-- Obtener el detalle de una receta en particular
-- Debe traer solo los datos pedidos en la ruta de detalle de receta
-Incluir los tipos de dieta asociados
-*/
 
 router.get("/creates", async (req, res) => {
   try {
@@ -197,6 +197,13 @@ router.get("/creates", async (req, res) => {
   }
 });
 
+/* 
+
+GET /recipes/{idReceta}:
+- Obtener el detalle de una receta en particular
+- Debe traer solo los datos pedidos en la ruta de detalle de receta
+Incluir los tipos de dieta asociados
+*/
 router.get("/:idReceta", async (req, res) => {
   const { idReceta } = req.params;
 
@@ -252,6 +259,7 @@ router.get("/:idReceta", async (req, res) => {
     let responseApi = await axios(`${URL}${idReceta}/information?${API_KEY}`);
 
     const {
+      id,
       image,
       title,
       dishTypes,
@@ -265,6 +273,7 @@ router.get("/:idReceta", async (req, res) => {
 
     if (vegetarian) {
       let infoDetail = {
+        id,
         image,
         title,
         dishTypes,

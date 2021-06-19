@@ -4,6 +4,7 @@ import { Route } from "react-router";
 import "./App.css";
 import AddByUserDb from "./components/AddByUserDB/AddByUserDB";
 import AddRecipe from "./components/AddRecipe/AddRecipe";
+import Favorites from "./components/Favorites/Favorites";
 import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Recipes from "./components/Recipes/Recipes";
@@ -32,6 +33,7 @@ function App() {
         component={RecipesDetailSearch}
       />
       <Route exact path="/Home/DataBase" component={AddByUserDb} />
+      <Route exact path="/Home/Favorites" component={Favorites} />
     </React.Fragment>
   );
 }

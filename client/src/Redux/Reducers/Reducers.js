@@ -45,6 +45,16 @@ function rootReducer(state = initialState, actions) {
         favorites: state.favorites.concat(actions.payload),
       };
 
+    case "REMOVE_FAVORITES":
+      console.log(actions.payload);
+      console.log(typeof actions.payload);
+      return {
+        ...state,
+        favorites: state.favorites.filter(
+          (recipe) => recipe.id != actions.payload
+        ),
+      };
+
     case "ADDED_BY_USER_DB":
       return {
         ...state,

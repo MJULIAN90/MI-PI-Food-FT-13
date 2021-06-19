@@ -18,6 +18,10 @@ function NavBar() {
       <button>
         <Link to="/Home/DataBase"> Recetas Creadas DB</Link>
       </button>
+
+      <button>
+        <Link to="/Home/Favorites"> Mis favoritos</Link>
+      </button>
     </div>
   );
 }

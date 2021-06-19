@@ -28,6 +28,12 @@ export const GET_BY_ID = (idReceta) => {
   };
 };
 
+export const REMOVE_FAVORITES = (id) => {
+  console.log(id);
+  console.log(typeof id);
+  return { type: "REMOVE_FAVORITES", payload: id };
+};
+
 export const SEARCHED = (data) => {
   return { type: "SEARCHED", payload: data };
 };

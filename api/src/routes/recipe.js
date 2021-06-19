@@ -29,17 +29,21 @@ router.post("/", async (req, res) => {
     image,
   };
 
-  let recipe_create = await Recipe.create({
-    id: uuidv4(),
-    ...data_recipe,
-  });
+  try {
+    let recipe_create = await Recipe.create({
+      id: uuidv4(),
+      ...data_recipe,
+    });
 
-  diets.map(async (e) => {
-    let id_diet = await Diet.findAll({ where: { Name: e } });
-    await recipe_create.setDiets(id_diet);
-  });
+    diets.map(async (e) => {
+      let id_diet = await Diet.findAll({ where: { Name: e } });
+      await recipe_create.setDiets(id_diet);
+    });
 
-  return res.send("Recipe Created");
+    return res.send("Recipe Created");
+  } catch (err) {
+    console.log("error ", err);
+  }
 });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { GET_BY_ID } from "../../Redux/Actios/Actios";
+import { ADD_FAVORITES, GET_BY_ID } from "../../Redux/Actios/Actios";
 
 //falta organizar lo de tipos de dietas
 function RecipesDetails(props) {
@@ -19,6 +19,11 @@ function RecipesDetails(props) {
     dispatch(GET_BY_ID(id));
   }, [dispatch, id]);
 
+  console.log(recipe_id);
+
+  const Add_favorite = () => {
+    dispatch(ADD_FAVORITES(recipe_id));
+  };
   return (
     <div>
       {recipe_id ? (
@@ -45,6 +50,10 @@ function RecipesDetails(props) {
       ) : (
         <h1>Cargando ...</h1>
       )}
+
+      <button type="button" onClick={Add_favorite}>
+        {"AGREGAR A FAVORITOS"}
+      </button>
       <Link to="/Home">Volver A Home</Link>
     </div>
   );
