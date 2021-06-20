@@ -198,7 +198,6 @@ router.get("/creates", async (req, res) => {
 });
 
 /* 
-
 GET /recipes/{idReceta}:
 - Obtener el detalle de una receta en particular
 - Debe traer solo los datos pedidos en la ruta de detalle de receta
@@ -271,9 +270,11 @@ router.get("/:idReceta", async (req, res) => {
       vegetarian,
     } = responseApi.data;
 
+    let id_conv = id.toString();
+
     if (vegetarian) {
       let infoDetail = {
-        id,
+        id: id_conv,
         image,
         title,
         dishTypes,
@@ -288,6 +289,7 @@ router.get("/:idReceta", async (req, res) => {
     }
 
     let infoDetail = {
+      id: id_conv,
       image,
       title,
       dishTypes,

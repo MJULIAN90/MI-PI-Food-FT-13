@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <div className="NavBar">
       <h3>
-        <Link to="/"> Home </Link>
+        <Link to="/"> Iniciar </Link>
       </h3>
       <Search />
 
@@ -21,6 +21,10 @@ function NavBar() {
 
       <button>
         <Link to="/Home/Favorites"> Mis favoritos</Link>
+      </button>
+
+      <button>
+        <Link to="/Home"> Volver a Home</Link>
       </button>
     </div>
   );

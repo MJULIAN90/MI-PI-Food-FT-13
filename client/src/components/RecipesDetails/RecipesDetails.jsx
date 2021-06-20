@@ -13,16 +13,23 @@ function RecipesDetails(props) {
 
   let id = match.params.id;
 
-  const { recipe_id } = state;
+  const { recipe_id, favorites } = state;
 
   useEffect(() => {
     dispatch(GET_BY_ID(id));
   }, [dispatch, id]);
 
-  console.log(recipe_id);
-
   const Add_favorite = () => {
-    dispatch(ADD_FAVORITES(recipe_id));
+    let id_favorite = recipe_id.id;
+
+    let info_repeat = favorites.find((e) => e.id === id_favorite);
+
+    if (!info_repeat) {
+      dispatch(ADD_FAVORITES(recipe_id));
+      return alert("AGREGADO A FAVORITOS");
+    }
+
+    return alert("YA SE ENCUENTRA EN FAVORITOS");
   };
   return (
     <div>

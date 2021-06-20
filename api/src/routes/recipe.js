@@ -43,6 +43,7 @@ router.post("/", async (req, res) => {
     return res.send("Recipe Created");
   } catch (err) {
     console.log("error ", err);
+    res.status(404).send("Error created");
   }
 });
 

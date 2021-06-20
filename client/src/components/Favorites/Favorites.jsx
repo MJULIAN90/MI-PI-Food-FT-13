@@ -9,8 +9,6 @@ function Favorites() {
   const dispatch = useDispatch();
 
   const remove_favorite = (e) => {
-    console.log("aca el id ", e.target.id);
-
     dispatch(REMOVE_FAVORITES(e.target.id));
   };
   return (
@@ -42,7 +40,7 @@ function Favorites() {
           </div>
         ))
       ) : (
-        <h1>aca vienen los favoritos </h1>
+        <h1>NO HAY FAVORITOS </h1>
       )}
       <Link to="/Home">Volver</Link>
     </div>

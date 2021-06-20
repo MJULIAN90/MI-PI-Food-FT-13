@@ -10,27 +10,31 @@ export const GET_DIETS = async () => {
   return { type: "GET_DIETS", payload: data.data };
 };
 
-export const ADDED_BY_USER_DB = async () => {
-  let data = await axios("http://localhost:3001/recipes/creates");
-  return { type: "ADDED_BY_USER_DB", payload: data.data };
+export const ADDED_BY_USER_DB = () => {
+  return async function (dispatch) {
+    try {
+      let data = await axios("http://localhost:3001/recipes/creates");
+      return dispatch({ type: "ADDED_BY_USER_DB", payload: data.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 
 export const GET_BY_ID = (idReceta) => {
   return function (dispatch) {
-    return axios
-      .get(`http://localhost:3001/recipes/${idReceta}`)
-      .then((response) => {
+    return axios(`http://localhost:3001/recipes/${idReceta}`).then(
+      (response) => {
         dispatch({
           type: "GET_BY_ID",
           payload: response.data,
         });
-      });
+      }
+    );
   };
 };
 
 export const REMOVE_FAVORITES = (id) => {
-  console.log(id);
-  console.log(typeof id);
   return { type: "REMOVE_FAVORITES", payload: id };
 };
 

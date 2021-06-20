@@ -10,8 +10,8 @@ function Searched() {
   return (
     <div>
       <div>
-        {state.length > 0 ? (
-          state.map((data) => (
+        {state?.length > 0 ? (
+          state?.map((data) => (
             <Link key={data.id} to={`/Home/DetailSearch/${data.id}`}>
               <div>
                 <h3>{data.title}</h3>

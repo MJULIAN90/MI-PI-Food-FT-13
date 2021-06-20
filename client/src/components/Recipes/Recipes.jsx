@@ -194,7 +194,6 @@ function Recipes() {
 
   return (
     <div>
-      <h1>aca filtros</h1>
       <div>
         <h3>Tipos de dietas </h3>
         <button type="button" onClick={filters} id="d1">

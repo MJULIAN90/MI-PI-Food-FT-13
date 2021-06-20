@@ -6,14 +6,9 @@ import { Link } from "react-router-dom";
 function AddByUserDb() {
   const dispatch = useDispatch();
 
-  let cargar = async () => {
-    let data = await ADDED_BY_USER_DB();
-    dispatch(data);
-  };
-
   useEffect(() => {
-    cargar();
-  }, []);
+    dispatch(ADDED_BY_USER_DB());
+  }, [dispatch]);
 
   const state = useSelector((state) => state.createByUserDb);
 
@@ -42,10 +37,10 @@ function AddByUserDb() {
         ))
       ) : (
         <>
-          <h1>No se encontraron recetas en la base de datos</h1>
-          <Link to="/Home">Volver</Link>
+          <h1>NO SE ENCONTRARON RECETAS EN LA BASE DE DATOS</h1>
         </>
       )}
+      <Link to="/Home">Volver</Link>
     </div>
   );
 }

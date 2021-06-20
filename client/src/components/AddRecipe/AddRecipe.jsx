@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { DELETE_BY_ID } from "../../Redux/Actios/Actios";
-
-//! pendiente hacer la validacion del formulario
+import { useSelector } from "react-redux";
 
 function AddRecipe() {
   const state = useSelector((state) => state);
@@ -81,6 +78,7 @@ function AddRecipe() {
             value={food.title}
             placeholder="Ingresa Nombre "
             onChange={handleOnchange}
+            required
           />
         </div>
         <div>
@@ -93,6 +91,7 @@ function AddRecipe() {
             value={food.summary}
             placeholder="Ingresa Resumen"
             onChange={handleOnchange}
+            required
           />
         </div>
         <div>
@@ -105,6 +104,7 @@ function AddRecipe() {
             value={food.Puntuation}
             placeholder="Ingresa Puntuacion Del PLato 1 a 10"
             onChange={handleOnchange}
+            required
           />
         </div>
         <div>
@@ -117,6 +117,7 @@ function AddRecipe() {
             value={food.lvl_healthScore}
             placeholder="Nivel de comida saludable"
             onChange={handleOnchange}
+            required
           />
         </div>
         <div>
@@ -129,16 +130,19 @@ function AddRecipe() {
             value={food.instructions}
             placeholder="Paso a paso"
             onChange={handleOnchange}
+            required
           />
         </div>
         <div>
           <label>Url de imagen: </label>
-          <textarea
+
+          <input
+            type="url"
             name="image"
-            type="text"
             value={food.image}
             placeholder="Url"
             onChange={handleOnchange}
+            required
           />
         </div>
         <div>
@@ -162,9 +166,7 @@ function AddRecipe() {
         </button>
       </form>
 
-      <Link to="/Home" onClick={useDispatch(DELETE_BY_ID())}>
-        Volver{" "}
-      </Link>
+      <Link to="/Home">{"Volver"}</Link>
     </div>
   );
 }

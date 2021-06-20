@@ -15,17 +15,22 @@ function Search() {
     e.preventDefault();
 
     let value = refInput.current.value;
-
+    refInput.current.value = "";
     let data = await axios(
       `http://localhost:3001/recipes?name=${
         value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
       }`
     );
 
-    refInput.current.value = "";
-    dispatch(SEARCHED(data.data));
+    if (data.data !== "No se encontraron coincidencias") {
+      dispatch(SEARCHED(data.data));
 
-    history.push("/Home/Search");
+      return history.push("/Home/Search");
+    }
+    if (data.data === "No se encontraron coincidencias") {
+      alert("Receta no encontrada");
+      return history.push("/Home");
+    }
   }
   return (
     <div>
