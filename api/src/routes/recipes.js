@@ -114,7 +114,7 @@ router.get("/", async (req, res) => {
     let info = [];
 
     let responseApi = await axios(
-      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=10`
+      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=50`
     );
 
     responseApi.data.results.map((data) => {

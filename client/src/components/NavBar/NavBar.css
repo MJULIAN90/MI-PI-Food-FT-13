@@ -1,4 +1,45 @@
 .NavBar {
-  background-color: rgb(100, 182, 237);
-  padding: 15px;
+  margin: 0.5%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #5dc460;
+  border-radius: 10px;
+  box-shadow: 1px -1px 13px 2px rgba(0, 0, 0, 0.8);
+}
+
+.logo {
+  width: 400px;
+  height: 200px;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 9%;
+  margin-right: 9%;
+}
+
+.menu button {
+  margin: 4px;
+  border-radius: 10px;
+  height: 35px;
+  border: none;
+  background-color: transparent;
+  color: #ff4720;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.menu button:hover {
+  color: white;
+  background-color: #ff4720;
+  transition: 0.4s ease all;
+}
+
+.rutas {
+  margin-top: auto;
 }

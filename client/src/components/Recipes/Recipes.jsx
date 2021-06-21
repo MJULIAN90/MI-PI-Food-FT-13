@@ -21,6 +21,7 @@ import {
   ORDER_BY_DIET_PALEOLITHIC,
 } from "../../Redux/Actios/Actios";
 
+import "./Recipes.css";
 function Recipes() {
   const state = useSelector((state) => state);
 
@@ -36,14 +37,14 @@ function Recipes() {
   const paginationRecipes = () => {
     if (entry_to_filter !== "") {
       if (data_cache.length > 0)
-        return data_cache.slice(pagination, pagination + 1);
+        return data_cache.slice(pagination, pagination + 10);
 
       if (data_cache.length === 0) {
         setentry_to_filter("");
         alert("NO SE ENCONTRARON RECETAS CON ESTA DIETA");
       }
     }
-    return data.slice(pagination, pagination + 1);
+    return data.slice(pagination, pagination + 10);
   };
 
   const filters = (e) => {
@@ -140,11 +141,11 @@ function Recipes() {
   };
 
   const nextPage = () => {
-    if (pagination < 9) setpagination(pagination + 1);
+    if (pagination < 90) setpagination(pagination + 10);
   };
 
   const prevPage = () => {
-    if (pagination > 0) setpagination(pagination - 1);
+    if (pagination > 0) setpagination(pagination - 10);
   };
 
   const resetFilter = () => {
@@ -158,29 +159,29 @@ function Recipes() {
       case "1":
         return setpagination(0);
       case "2":
-        return setpagination(1);
+        return setpagination(10);
       case "3":
-        return setpagination(2);
+        return setpagination(20);
       case "4":
-        return setpagination(3);
+        return setpagination(30);
       case "5":
-        return setpagination(4);
+        return setpagination(40);
       case "6":
-        return setpagination(5);
+        return setpagination(50);
       case "7":
-        return setpagination(6);
+        return setpagination(60);
       case "8":
-        return setpagination(7);
+        return setpagination(70);
       case "9":
-        return setpagination(8);
+        return setpagination(80);
       case "10":
-        return setpagination(9);
+        return setpagination(90);
       default:
         break;
     }
   };
 
-  let pagecount = Math.ceil(data_cache.length / 1);
+  let pagecount = Math.ceil(data_cache.length / 10);
 
   let array = [];
 
@@ -193,9 +194,103 @@ function Recipes() {
   prueba();
 
   return (
-    <div>
-      <div>
-        <h3>Tipos de dietas </h3>
+    <div className="recipes">
+      <div className="principal">
+        <div className="filters">
+          <button type="button" id="ordAsc" onClick={filters}>
+            {"Ordenar asc alfabetico "}
+          </button>
+          <button type="button" id="ordDes" onClick={filters}>
+            {"Ordenar desc alfabetico"}
+          </button>
+          <button type="button" id="ordScore" onClick={filters}>
+            {"Ordenar x SCORE"}
+          </button>
+          <button type="button" onClick={resetFilter}>
+            {"Reset Filtros"}
+          </button>
+        </div>
+        <div className="recipeCreate">
+          {paginationRecipes().map((data) => (
+            <div key={data.id} className="recipeCard">
+              <div className="titulo">
+                <Link to={`/Home/Details/${data.id}`}>
+                  <h3>{data.title}</h3>
+                </Link>
+              </div>
+              <div className="contenido">
+                <div className="img_diets">
+                  <img
+                    src={data.image}
+                    alt="error cargando"
+                    width="120"
+                    height="120"
+                  />{" "}
+                </div>
+
+                <div className="text_diets">
+                  {"Diets:"}
+                  {data.diets.map((e, i) => (
+                    <div key={i}>{e}</div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="botones ">
+          {cache_data.length <= 0 ? (
+            <>
+              <button type="button" onClick={prevPage}>
+                {"<<"}
+              </button>
+              <button type="button" onClick={botones} id="1">
+                {"1"}
+              </button>
+              <button type="button" onClick={botones} id="2">
+                {"2"}
+              </button>
+              <button type="button" onClick={botones} id="3">
+                {"3"}
+              </button>
+              <button type="button" onClick={botones} id="4">
+                {"4"}
+              </button>
+              <button type="button" onClick={botones} id="5">
+                {"5"}
+              </button>
+              <button type="button" onClick={botones} id="6">
+                {"6"}
+              </button>
+              <button type="button" onClick={botones} id="7">
+                {"7"}
+              </button>
+              <button type="button" onClick={botones} id="8">
+                {"8"}
+              </button>
+              <button type="button" onClick={botones} id="9">
+                {"9"}
+              </button>
+              <button type="button" onClick={botones} id="10">
+                {"10"}
+              </button>
+              <button type="button" onClick={nextPage}>
+                {">>"}
+              </button>
+            </>
+          ) : (
+            <div>
+              {array.map((i) => (
+                <button type="button" onClick={botones} id={i} key={i}>
+                  {i}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="TypesDiets">
         <button type="button" onClick={filters} id="d1">
           {"GLUTEN FREE "}
         </button>
@@ -232,86 +327,6 @@ function Recipes() {
         <button type="button" onClick={filters} id="d12">
           {"PALEOLITHIC"}
         </button>
-      </div>
-      <div>
-        <button type="button" id="ordAsc" onClick={filters}>
-          {"Ordenar asc alfabetico "}
-        </button>
-        <button type="button" id="ordDes" onClick={filters}>
-          {"Ordenar desc alfabetico"}
-        </button>
-        <button type="button" id="ordScore" onClick={filters}>
-          {"Ordenar x SCORE"}
-        </button>
-        <button type="button" onClick={resetFilter}>
-          {"Reset Filtros"}
-        </button>
-      </div>
-      {paginationRecipes().map((data) => (
-        <Link key={data.id} to={`/Home/Details/${data.id}`}>
-          <div>
-            <h3>{data.title}</h3>
-            <img src={data.image} alt="error cargando" width="80" height="80" />
-            <h4>
-              <br />
-              {"Diets:"}
-              {data.diets.map((e, i) => (
-                <div key={i}>{e}</div>
-              ))}
-            </h4>
-          </div>
-        </Link>
-      ))}
-
-      <div>
-        {cache_data.length <= 0 ? (
-          <>
-            <button type="button" onClick={prevPage}>
-              {"Anterior"}
-            </button>
-            <button type="button" onClick={botones} id="1">
-              {"1"}
-            </button>
-            <button type="button" onClick={botones} id="2">
-              {"2"}
-            </button>
-            <button type="button" onClick={botones} id="3">
-              {"3"}
-            </button>
-            <button type="button" onClick={botones} id="4">
-              {"4"}
-            </button>
-            <button type="button" onClick={botones} id="5">
-              {"5"}
-            </button>
-            <button type="button" onClick={botones} id="6">
-              {"6"}
-            </button>
-            <button type="button" onClick={botones} id="7">
-              {"7"}
-            </button>
-            <button type="button" onClick={botones} id="8">
-              {"8"}
-            </button>
-            <button type="button" onClick={botones} id="9">
-              {"9"}
-            </button>
-            <button type="button" onClick={botones} id="10">
-              {"10"}
-            </button>
-            <button type="button" onClick={nextPage}>
-              {"Siguiente"}
-            </button>
-          </>
-        ) : (
-          <div>
-            {array.map((i) => (
-              <button type="button" onClick={botones} id={i} key={i}>
-                {i}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

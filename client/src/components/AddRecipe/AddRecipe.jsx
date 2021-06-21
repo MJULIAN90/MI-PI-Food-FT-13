@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { ADDED_BY_USER_DB } from "../../Redux/Actios/Actios";
 
 function AddRecipe() {
   const state = useSelector((state) => state);
+  const dispatch = useDispatch();
   const { diets } = state;
 
   const history = useHistory();
@@ -27,6 +29,7 @@ function AddRecipe() {
   }
 
   function diets_selecion() {
+    alert("DIETAS SELECIONADAS ELIMINADAS");
     setDiets_list([]);
   }
   function handleChooseClick(e) {
@@ -63,11 +66,13 @@ function AddRecipe() {
       image: "",
     });
 
+    dispatch(ADDED_BY_USER_DB());
+
     setDiets_list([]);
   }
 
   return (
-    <div>
+    <div className="addRecipe">
       <h2>AGREGAR PLATO</h2>
       <form onSubmit={handleSumit}>
         <div>

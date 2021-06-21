@@ -1,31 +1,51 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Search from "../Search/Search";
 import "./NavBar.css";
 
+import img from "../../Images/logo2.png";
+
 function NavBar() {
+  const history = useHistory();
+
+  function home() {
+    history.push("/Home");
+  }
+
+  function recetas() {
+    history.push("/Home/DataBase");
+  }
+
+  function favoritos() {
+    history.push("/Home/Favorites");
+  }
+
+  function agregar() {
+    history.push("/Home/AddRecipe");
+  }
+
   return (
     <div className="NavBar">
-      <h3>
-        <Link to="/"> Iniciar </Link>
-      </h3>
-      <Search />
+      <div className="menu">
+        <div className="rutas">
+          <button onClick={home}> Home</button>
 
-      <button>
-        <Link to="/Home/AddRecipe">Agregar Receta </Link>
-      </button>
+          <button onClick={recetas}> Mis recetas </button>
 
-      <button>
-        <Link to="/Home/DataBase"> Recetas Creadas DB</Link>
-      </button>
+          <button onClick={favoritos}> Mis favoritos </button>
 
-      <button>
-        <Link to="/Home/Favorites"> Mis favoritos</Link>
-      </button>
+          <button onClick={agregar}> Agregar Receta </button>
+        </div>
+        <div>
+          <Link to="/">
+            <img src={img} alt="error cargando" className="logo" />
+          </Link>
+        </div>
 
-      <button>
-        <Link to="/Home"> Volver a Home</Link>
-      </button>
+        <div className="rutas">
+          <Search />{" "}
+        </div>
+      </div>
     </div>
   );
 }

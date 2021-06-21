@@ -1,4 +1,25 @@
-body {
-  background-color: azure;
-  text-align: center;
+.Home {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../Images/fondo.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  min-height: 98vh;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 1px 15px 5px rgba(0, 0, 0, 0.92);
+}
+
+.imagen {
+  margin: 0 auto;
+  margin-top: 70px;
+  min-height: 20rem;
+  width: 50rem;
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.8));
 }
