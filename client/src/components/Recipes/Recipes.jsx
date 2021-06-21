@@ -50,16 +50,19 @@ function Recipes() {
   const filters = (e) => {
     switch (e.target.id) {
       case "ordAsc": {
+        setentry_to_filter("ok");
         setpagination(0);
         return dispatch(ORDENAR_BY_NAME_ASC(data));
       }
 
       case "ordDes": {
+        setentry_to_filter("ok");
         setpagination(0);
         return dispatch(ORDENAR_BY_NAME_DESC(data));
       }
 
       case "ordScore": {
+        setentry_to_filter("ok");
         setpagination(0);
         return dispatch(ORDENAR_BY_SCORE(data));
       }

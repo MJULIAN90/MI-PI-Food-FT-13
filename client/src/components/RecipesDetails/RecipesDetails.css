@@ -1,0 +1,18 @@
+.idRecipes {
+  margin-left: 15%;
+  margin-right: 15%;
+  background-color: #5dc460;
+  color: white;
+}
+
+.add_button {
+  color: white;
+  background-color: #ff4720;
+  transition: 0.4s ease all;
+}
+
+.add_button:hover {
+  background-color: white;
+  color: #ff4720;
+  transition: 0.4s ease all;
+}

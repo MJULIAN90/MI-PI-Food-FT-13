@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADDED_BY_USER_DB } from "../../Redux/Actios/Actios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import "./AddByUserDB.css";
 
 function AddByUserDb() {
   const dispatch = useDispatch();
+  let history = useHistory();
 
   useEffect(() => {
     dispatch(ADDED_BY_USER_DB());
@@ -12,35 +14,47 @@ function AddByUserDb() {
 
   const state = useSelector((state) => state.createByUserDb);
 
+  function volver() {
+    history.push("/Home");
+  }
+
   return (
-    <div>
+    <div className="dbCreates">
       {state.length > 0 ? (
         state.map((data) => (
-          <Link key={data.id} to={`/Home/Details/${data.id}`}>
-            <div>
-              <h3>{data.title}</h3>
-              <img
-                src={data.image}
-                alt="error cargando"
-                width="80"
-                height="80"
-              />
-              <h4>
-                <br />
+          <div key={data.id} className="recipeCard">
+            <div className="titulo">
+              <Link to={`/Home/Details/${data.id}`}>
+                <h3>{data.title}</h3>
+              </Link>
+            </div>
+            <div className="contenido">
+              <div className="img_diets">
+                <img
+                  src={data.image}
+                  alt="error cargando"
+                  width="120"
+                  height="120"
+                />{" "}
+              </div>
+
+              <div className="text_diets">
                 {"Diets:"}
                 {data.diets.map((e, i) => (
                   <div key={i}>{e}</div>
                 ))}
-              </h4>
+              </div>
             </div>
-          </Link>
+          </div>
         ))
       ) : (
         <>
           <h1>NO SE ENCONTRARON RECETAS EN LA BASE DE DATOS</h1>
         </>
       )}
-      <Link to="/Home">Volver</Link>
+      <button type="button" onClick={volver} className="volver">
+        Volver
+      </button>
     </div>
   );
 }

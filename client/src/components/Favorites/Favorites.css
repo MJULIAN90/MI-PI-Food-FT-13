@@ -1,0 +1,36 @@
+button {
+  margin: 4px;
+  border-radius: 10px;
+  height: 35px;
+  border: none;
+  background-color: transparent;
+  color: #ff4720;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+button:hover {
+  color: white;
+  background-color: #ff4720;
+  transition: 0.4s ease all;
+}
+
+.volver {
+  margin-left: 48%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+}
+
+.favorites {
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
+}
+
+.favorites h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

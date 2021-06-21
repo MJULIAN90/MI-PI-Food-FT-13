@@ -1,3 +1,56 @@
 .addRecipe {
   display: flex;
+  justify-content: center;
+  background-color: #5dc460;
+  margin-left: 35%;
+  margin-right: 35%;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+.formulario div {
+  margin: 8px;
+}
+
+.formulario h2 {
+  text-align: center;
+}
+
+.formulario ul {
+  text-align: center;
+}
+
+.addbutton {
+  display: flex;
+  justify-content: center;
+}
+
+.inputs {
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+}
+
+.form_inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.textarea {
+  border: none;
+  border-radius: 5px;
+}
+
+.add_button {
+  color: white;
+  background-color: #ff4720;
+  transition: 0.4s ease all;
+}
+
+.add_button:hover {
+  background-color: white;
+  color: #ff4720;
+  transition: 0.4s ease all;
 }
