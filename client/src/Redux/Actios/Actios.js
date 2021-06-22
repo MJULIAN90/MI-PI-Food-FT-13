@@ -22,15 +22,13 @@ export const ADDED_BY_USER_DB = () => {
 };
 
 export const GET_BY_ID = (idReceta) => {
-  return function (dispatch) {
-    return axios(`http://localhost:3001/recipes/${idReceta}`).then(
-      (response) => {
-        dispatch({
-          type: "GET_BY_ID",
-          payload: response.data,
-        });
-      }
-    );
+  return async function (dispatch) {
+    try {
+      let data = await axios(`http://localhost:3001/recipes/${idReceta}`);
+      return dispatch({ type: "GET_BY_ID", payload: data.data });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -44,10 +42,6 @@ export const SEARCHED = (data) => {
 
 export const ADD_FAVORITES = (data) => {
   return { type: "ADD_FAVORITES", payload: data };
-};
-
-export const DELETE_BY_ID = () => {
-  return { type: "DELETE_BY_ID" };
 };
 
 export const ORDENAR_BY_NAME_ASC = (data) => {

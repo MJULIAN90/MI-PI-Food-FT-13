@@ -217,7 +217,7 @@ function Recipes() {
           {paginationRecipes().map((data) => (
             <div key={data.id} className="recipeCard">
               <div className="titulo">
-                <Link to={`/Home/Details/${data.id}`}>
+                <Link to={`/Home/Details/${data.id}`} className="links">
                   <h3>{data.title}</h3>
                 </Link>
               </div>

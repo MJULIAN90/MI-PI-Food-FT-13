@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
 
     diets.map(async (e) => {
       let id_diet = await Diet.findAll({ where: { Name: e } });
-      await recipe_create.setDiets(id_diet);
+      await recipe_create.addDiet(id_diet);
     });
 
     return res.send("Recipe Created");

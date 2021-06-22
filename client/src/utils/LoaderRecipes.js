@@ -4,7 +4,5 @@ import { useDispatch } from "react-redux";
 export default async function LoaderRecipes() {
   const dispatch = useDispatch();
 
-  let payload = await GET_RECIPES();
-
-  return dispatch(payload);
+  return dispatch(await GET_RECIPES());
 }

@@ -23,3 +23,7 @@
   width: 50rem;
   filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.8));
 }
+
+.imagen:hover {
+  filter: drop-shadow(0 10px 10px rgba(230, 223, 223, 0.2));
+}

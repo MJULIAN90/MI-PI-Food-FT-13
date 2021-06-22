@@ -34,13 +34,6 @@ function rootReducer(state = initialState, actions) {
         recipe_id: actions.payload,
       };
 
-    case "DELETE_BY_ID": {
-      return {
-        ...state,
-        recipe_id: undefined,
-      };
-    }
-
     case "ADD_FAVORITES":
       return {
         ...state,

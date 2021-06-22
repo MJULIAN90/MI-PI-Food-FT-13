@@ -4,7 +4,5 @@ import { useDispatch } from "react-redux";
 export default async function LoaderDiets() {
   const dispatch = useDispatch();
 
-  let payload = await GET_DIETS();
-
-  return dispatch(payload);
+  return dispatch(await GET_DIETS());
 }

@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
   const { name } = req.query;
 
   if (name) {
-    console.log(name);
     let info = [];
     let db_array = [];
 
@@ -33,8 +32,6 @@ router.get("/", async (req, res) => {
         },
       ],
     });
-
-    console.log(responseDb);
 
     if (responseDb.length > 0) {
       responseDb.map((e) => {

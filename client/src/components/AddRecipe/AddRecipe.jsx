@@ -30,7 +30,6 @@ function AddRecipe() {
   }
 
   function diets_selecion() {
-    alert("DIETAS SELECIONADAS ELIMINADAS");
     setDiets_list([]);
   }
   function handleChooseClick(e) {
@@ -99,7 +98,7 @@ function AddRecipe() {
             name="summary"
             type="text"
             rows="10"
-            cols="15"
+            cols="50"
             value={food.summary}
             placeholder="Ingresa Resumen"
             onChange={handleOnchange}
@@ -121,7 +120,7 @@ function AddRecipe() {
           />
         </div>
         <div className="form_inputs">
-          <label>Nivel de "comida saludable : </label>
+          <label>Nivel de comida saludable : </label>
           <input
             className="inputs"
             name="lvl_healthScore"
@@ -135,7 +134,7 @@ function AddRecipe() {
           />
         </div>
         <div className="form_inputs">
-          <label>Paso a paso": </label>
+          <label>Paso a paso: </label>
           <textarea
             className="textarea"
             name="instructions"
@@ -163,11 +162,17 @@ function AddRecipe() {
         </div>
         <div>
           <h2>Dietas</h2>
-          <div>
+          <div className="dietasSeleccion">
             <ul>
               {diets.map((e, i) => (
-                <div key={i} onClick={handleChooseClick} id={e}>
-                  {e}
+                <div key={i}>
+                  <label
+                    onClick={handleChooseClick}
+                    id={e}
+                    className={Diets_list.includes(e) ? "dieta1" : "dieta2"}
+                  >
+                    {e}
+                  </label>
                 </div>
               ))}
             </ul>
@@ -178,7 +183,7 @@ function AddRecipe() {
               onClick={diets_selecion}
               className="add_button"
             >
-              Reset Selecion dietas
+              Borrar Selecionados
             </button>
           </div>
         </div>
