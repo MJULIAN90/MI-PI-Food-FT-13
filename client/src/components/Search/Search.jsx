@@ -24,6 +24,8 @@ function Search() {
         }`
       );
 
+      console.log(data.data);
+
       if (data.data !== "No se encontraron coincidencias") {
         dispatch(SEARCHED(data.data));
 

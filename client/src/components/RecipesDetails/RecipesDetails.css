@@ -1,18 +1,51 @@
 .idRecipes {
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
   background-color: #5dc460;
   color: white;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.img_diets {
+  display: flex;
+  justify-content: center;
 }
 
 .add_button {
   color: white;
   background-color: #ff4720;
   transition: 0.4s ease all;
+  margin: 0.5%;
 }
 
 .add_button:hover {
   background-color: white;
   color: #ff4720;
   transition: 0.4s ease all;
+}
+
+.botones_recipes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+}
+
+.idRecipes ul {
+  list-style: none;
+}
+
+.id_text {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.id_text p {
+  text-align: justify;
+}
+
+.ima_size {
+  height: 450px;
+  width: 400px;
 }

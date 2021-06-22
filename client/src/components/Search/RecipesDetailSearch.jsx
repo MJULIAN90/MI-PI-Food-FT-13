@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_FAVORITES, GET_BY_ID } from "../../Redux/Actios/Actios";
 
 //falta organizar lo de tipos de dietas
 function RecipesDetailSearch(props) {
   const state = useSelector((state) => state);
+  let history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -31,14 +32,32 @@ function RecipesDetailSearch(props) {
 
     return alert("YA SE ENCUENTRA EN FAVORITOS");
   };
+
+  function volverSearch() {
+    history.push("/Home/Search");
+  }
+
   return (
-    <div>
+    <div className="idRecipes">
       {recipe_id ? (
-        <div>
+        <div className="id_text">
+          <br />
           <h2>{recipe_id.title}</h2>
-          <img src={recipe_id.image} alt="Error Loading" />
+          <div className="img_diets">
+            <img
+              src={recipe_id.image}
+              alt="Error Loading"
+              className="ima_size"
+            />
+          </div>
+
           <h3>TIPOS DE PLATOS: </h3>
-          <p>{recipe_id.type_dish}</p>
+          <ul>
+            {recipe_id?.dishTypes?.map((e, i) => (
+              <li key={i}>{e} </li>
+            ))}
+          </ul>
+
           <h3>TIPOS DE DIETAS:</h3>
           <div>
             <ul>
@@ -57,10 +76,12 @@ function RecipesDetailSearch(props) {
       ) : (
         <h1>Cargando ...</h1>
       )}
-      <button type="button" onClick={Add_favorite}>
+      <button type="button" onClick={Add_favorite} className="add_button">
         {"AGREGAR A FAVORITOS"}
       </button>
-      <Link to="/Home/Search">Volver</Link>
+      <button type="button" onClick={volverSearch} className="add_button">
+        VOLVER A BUSQUEDA
+      </button>
     </div>
   );
 }

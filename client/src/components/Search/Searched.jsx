@@ -21,7 +21,7 @@ function Searched() {
             {state.map((data) => (
               <div key={data.id} className="recipeCard">
                 <div className="titulo">
-                  <Link to={`/Home/Details/${data.id}`}>
+                  <Link to={`/Home/DetailSearch/${data.id}`}>
                     <h3>{data.title}</h3>
                   </Link>
                 </div>

@@ -42,15 +42,24 @@ function RecipesDetails(props) {
   return (
     <div className="idRecipes">
       {recipe_id ? (
-        <div>
+        <div className="id_text">
+          <br />
           <h2>{recipe_id.title}</h2>
-          <img
-            src={recipe_id.image}
-            alt="Error Loading"
-            className="img_diets"
-          />
+          <div className="img_diets">
+            <img
+              src={recipe_id.image}
+              alt="Error Loading"
+              className="ima_size"
+            />
+          </div>
+
           <h3>TIPOS DE PLATOS: </h3>
-          <p>{recipe_id.type_dish}</p>
+          <ul>
+            {recipe_id?.dishTypes?.map((e, i) => (
+              <li key={i}>{e} </li>
+            ))}
+          </ul>
+
           <h3>TIPOS DE DIETAS:</h3>
           <div>
             <ul>
@@ -69,13 +78,14 @@ function RecipesDetails(props) {
       ) : (
         <h1>Cargando ...</h1>
       )}
-
-      <button type="button" onClick={Add_favorite} className="add_button">
-        {"AGREGAR A FAVORITOS"}
-      </button>
-      <button type="button" onClick={volver} className="add_button">
-        Volver
-      </button>
+      <div className="botones_recipes">
+        <button type="button" onClick={Add_favorite} className="add_button">
+          {"AGREGAR A FAVORITOS"}
+        </button>
+        <button type="button" onClick={volver} className="add_button">
+          Volver
+        </button>
+      </div>
     </div>
   );
 }

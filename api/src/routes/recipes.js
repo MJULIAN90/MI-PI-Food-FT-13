@@ -17,13 +17,14 @@ router.get("/", async (req, res) => {
   const { name } = req.query;
 
   if (name) {
+    console.log(name);
     let info = [];
     let db_array = [];
 
     let responseDb = await Recipe.findAll({
       where: {
         title: {
-          [Op.iLike]: name,
+          [Op.iLike]: `%${name}%`,
         },
       },
       include: [
@@ -32,6 +33,8 @@ router.get("/", async (req, res) => {
         },
       ],
     });
+
+    console.log(responseDb);
 
     if (responseDb.length > 0) {
       responseDb.map((e) => {
@@ -68,7 +71,7 @@ router.get("/", async (req, res) => {
     }
 
     let responseApi = await axios(
-      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=9`
+      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=30`
     );
 
     let filtro = responseApi.data.results;

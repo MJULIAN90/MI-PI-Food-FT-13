@@ -33,8 +33,8 @@ function AddByUserDb() {
                 <img
                   src={data.image}
                   alt="error cargando"
-                  width="120"
-                  height="120"
+                  width="200"
+                  height="200"
                 />{" "}
               </div>
 
