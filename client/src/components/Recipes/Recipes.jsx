@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -19,6 +19,7 @@ import {
   ORDER_BY_DIET_WHOLE30,
   ORDER_BY_DIET_DAIRYFREE,
   ORDER_BY_DIET_PALEOLITHIC,
+  ADDED_BY_USER_DB,
 } from "../../Redux/Actios/Actios";
 
 import "./Recipes.css";
@@ -33,6 +34,10 @@ function Recipes() {
 
   let data = [...recipes];
   let data_cache = [...cache_data];
+
+  useEffect(() => {
+    dispatch(ADDED_BY_USER_DB());
+  }, [dispatch]);
 
   const paginationRecipes = () => {
     if (entry_to_filter !== "") {
@@ -52,90 +57,90 @@ function Recipes() {
       case "ordAsc": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDENAR_BY_NAME_ASC(data));
+        return dispatch(ORDENAR_BY_NAME_ASC());
       }
 
       case "ordDes": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDENAR_BY_NAME_DESC(data));
+        return dispatch(ORDENAR_BY_NAME_DESC());
       }
 
       case "ordScore": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDENAR_BY_SCORE(data));
+        return dispatch(ORDENAR_BY_SCORE());
       }
       case "d1": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_GLUTENFREE(data));
+        return dispatch(ORDER_BY_DIET_GLUTENFREE());
       }
 
       case "d2": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_KETOGENIC(data));
+        return dispatch(ORDER_BY_DIET_KETOGENIC());
       }
 
       case "d3": {
         setpagination(0);
         setentry_to_filter("ok");
-        return dispatch(ORDER_BY_DIET_VEGETARIAN(data));
+        return dispatch(ORDER_BY_DIET_VEGETARIAN());
       }
 
       case "d4": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_LACTO_VEGETARIAN(data));
+        return dispatch(ORDER_BY_DIET_LACTO_VEGETARIAN());
       }
 
       case "d5": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_OVO_VEGETARIAN(data));
+        return dispatch(ORDER_BY_DIET_OVO_VEGETARIAN());
       }
 
       case "d6": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_VEGAN(data));
+        return dispatch(ORDER_BY_DIET_VEGAN());
       }
 
       case "d7": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_PESCETARIAN(data));
+        return dispatch(ORDER_BY_DIET_PESCETARIAN());
       }
 
       case "d8": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_PALEO(data));
+        return dispatch(ORDER_BY_DIET_PALEO());
       }
 
       case "d9": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_PRIMAL(data));
+        return dispatch(ORDER_BY_DIET_PRIMAL());
       }
 
       case "d10": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_WHOLE30(data));
+        return dispatch(ORDER_BY_DIET_WHOLE30());
       }
 
       case "d11": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_DAIRYFREE(data));
+        return dispatch(ORDER_BY_DIET_DAIRYFREE());
       }
 
       case "d12": {
         setentry_to_filter("ok");
         setpagination(0);
-        return dispatch(ORDER_BY_DIET_PALEOLITHIC(data));
+        return dispatch(ORDER_BY_DIET_PALEOLITHIC());
       }
 
       default:

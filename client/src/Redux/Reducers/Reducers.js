@@ -57,23 +57,19 @@ function rootReducer(state = initialState, actions) {
     case "ORDENAR_BY_NAME_ASC":
       return {
         ...state,
-        cache_data: actions.payload.sort((a, b) =>
-          a.title > b.title ? 1 : -1
-        ),
+        cache_data: data.sort((a, b) => (a.title > b.title ? 1 : -1)),
       };
 
     case "ORDENAR_BY_NAME_DESC":
       return {
         ...state,
-        cache_data: actions.payload.sort((a, b) =>
-          a.title < b.title ? 1 : -1
-        ),
+        cache_data: data.sort((a, b) => (a.title < b.title ? 1 : -1)),
       };
 
     case "ORDENAR_BY_SCORE":
       return {
         ...state,
-        cache_data: actions.payload.sort((a, b) =>
+        cache_data: data.sort((a, b) =>
           a.spoonacularScore < b.spoonacularScore ? 1 : -1
         ),
       };

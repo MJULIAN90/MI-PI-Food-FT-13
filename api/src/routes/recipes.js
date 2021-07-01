@@ -118,7 +118,15 @@ router.get("/", async (req, res) => {
     );
 
     responseApi.data.results.map((data) => {
-      const { title, diets, image, vegetarian, id, spoonacularScore } = data;
+      const {
+        title,
+        diets,
+        image,
+        vegetarian,
+        id,
+        spoonacularScore,
+        healthScore,
+      } = data;
 
       if (vegetarian) {
         let obj = {
@@ -127,6 +135,7 @@ router.get("/", async (req, res) => {
           image,
           diets: [...diets, "vegeterian"],
           spoonacularScore,
+          healthScore,
         };
 
         return info.push(obj);
@@ -138,6 +147,7 @@ router.get("/", async (req, res) => {
         title,
         diets,
         spoonacularScore,
+        healthScore,
       };
 
       return info.push(obj);

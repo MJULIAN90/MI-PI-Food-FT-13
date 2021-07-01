@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { ADD_FAVORITES, GET_BY_ID } from "../../Redux/Actios/Actios";
 import "./RecipesDetails.css";
 
-//falta organizar lo de tipos de dietas
 function RecipesDetails(props) {
   const state = useSelector((state) => state);
 
