@@ -174,6 +174,7 @@ function Recipes() {
         return setpagination(30);
       case "5":
         return setpagination(40);
+
       default:
         break;
     }
@@ -258,6 +259,7 @@ function Recipes() {
               <button type="button" onClick={botones} id="5">
                 {"5"}
               </button>
+
               <button type="button" onClick={nextPage}>
                 {">>"}
               </button>

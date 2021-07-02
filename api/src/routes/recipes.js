@@ -1,5 +1,5 @@
 require("dotenv").config();
-//const { API_KEY } = process.env;
+const { API_KEY } = process.env;
 const { Router } = require("express");
 const router = Router();
 const axios = require("axios");
@@ -69,7 +69,7 @@ router.get("/", async (req, res) => {
       }
 
       let responseApi = await axios(
-        `${URL}complexSearch?addRecipeInformation=true&apiKey=38613bb7b63d4179bcc6be423b74c2b6&number=30`
+        `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=30`
       );
 
       let filtro = responseApi.data.results;
@@ -119,7 +119,7 @@ router.get("/", async (req, res) => {
       let info = [];
 
       let responseApi = await axios(
-        `${URL}complexSearch?addRecipeInformation=true&apiKey=38613bb7b63d4179bcc6be423b74c2b6&number=50`
+        `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=50`
       );
 
       responseApi.data.results.map((data) => {
@@ -278,9 +278,7 @@ router.get("/:idReceta", async (req, res) => {
 
   if (!entry) {
     try {
-      let responseApi = await axios(
-        `${URL}${idReceta}/information?apiKey=38613bb7b63d4179bcc6be423b74c2b6`
-      );
+      let responseApi = await axios(`${URL}${idReceta}/information?${API_KEY}`);
 
       const {
         id,
