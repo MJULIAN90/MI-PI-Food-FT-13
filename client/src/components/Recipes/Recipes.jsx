@@ -149,7 +149,7 @@ function Recipes() {
   };
 
   const nextPage = () => {
-    if (pagination < 90) setpagination(pagination + 10);
+    if (pagination < 40) setpagination(pagination + 10);
   };
 
   const prevPage = () => {
@@ -174,16 +174,6 @@ function Recipes() {
         return setpagination(30);
       case "5":
         return setpagination(40);
-      case "6":
-        return setpagination(50);
-      case "7":
-        return setpagination(60);
-      case "8":
-        return setpagination(70);
-      case "9":
-        return setpagination(80);
-      case "10":
-        return setpagination(90);
       default:
         break;
     }
@@ -267,21 +257,6 @@ function Recipes() {
               </button>
               <button type="button" onClick={botones} id="5">
                 {"5"}
-              </button>
-              <button type="button" onClick={botones} id="6">
-                {"6"}
-              </button>
-              <button type="button" onClick={botones} id="7">
-                {"7"}
-              </button>
-              <button type="button" onClick={botones} id="8">
-                {"8"}
-              </button>
-              <button type="button" onClick={botones} id="9">
-                {"9"}
-              </button>
-              <button type="button" onClick={botones} id="10">
-                {"10"}
               </button>
               <button type="button" onClick={nextPage}>
                 {">>"}
