@@ -13,155 +13,149 @@ GET /recipes?name="...":
 - Si no existe ninguna receta mostrar un mensaje adecuado
 */
 
+console.log(API_KEY);
+
 router.get("/", async (req, res) => {
   const { name } = req.query;
 
   if (name) {
-    try {
-      let info = [];
-      let db_array = [];
+    let info = [];
+    let db_array = [];
 
-      let responseDb = await Recipe.findAll({
-        where: {
-          title: {
-            [Op.iLike]: `%${name}%`,
-          },
+    let responseDb = await Recipe.findAll({
+      where: {
+        title: {
+          [Op.iLike]: `%${name}%`,
         },
-        include: [
-          {
-            model: Diet,
-          },
-        ],
-      });
+      },
+      include: [
+        {
+          model: Diet,
+        },
+      ],
+    });
 
-      if (responseDb.length > 0) {
-        responseDb.map((e) => {
-          let array_diets = [];
+    if (responseDb.length > 0) {
+      responseDb.map((e) => {
+        let array_diets = [];
 
-          const {
-            title,
-            id,
-            summary,
-            Puntuation,
-            lvl_healthScore,
-            instructions,
-            image,
-            diets,
-          } = e;
+        const {
+          title,
+          id,
+          summary,
+          Puntuation,
+          lvl_healthScore,
+          instructions,
+          image,
+          diets,
+        } = e;
 
-          diets.map((e) => {
-            array_diets.push(e.dataValues.Name);
-          });
-
-          let obj = {
-            title,
-            id,
-            summary,
-            Puntuation,
-            lvl_healthScore,
-            instructions,
-            image,
-            diets: array_diets,
-          };
-
-          db_array.push(obj);
+        diets.map((e) => {
+          array_diets.push(e.dataValues.Name);
         });
-      }
 
-      let responseApi = await axios(
-        `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=30`
-      );
+        let obj = {
+          title,
+          id,
+          summary,
+          Puntuation,
+          lvl_healthScore,
+          instructions,
+          image,
+          diets: array_diets,
+        };
 
-      let filtro = responseApi.data.results;
-      let filters = filtro.filter((e) => e.title.includes(name));
+        db_array.push(obj);
+      });
+    }
 
-      filters.map((e) => {
-        const { title, image, diets, vegetarian, id } = e;
+    let responseApi = await axios(
+      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=30`
+    );
 
-        if (vegetarian) {
-          let obj = {
-            id,
-            title,
-            image,
-            diets: [...diets, "vegeterian"],
-          };
+    let filtro = responseApi.data.results;
+    let filters = filtro.filter((e) => e.title.includes(name));
 
-          return info.push(obj);
-        }
+    filters.map((e) => {
+      const { title, image, diets, vegetarian, id } = e;
 
+      if (vegetarian) {
         let obj = {
           id,
           title,
           image,
-          diets,
+          diets: [...diets, "vegeterian"],
         };
 
         return info.push(obj);
-      });
-
-      let total = db_array.concat(info);
-
-      if (total.length === 0) {
-        console.log("no hay nada");
-        return res.send("No se encontraron coincidencias");
       }
 
-      if (db_array.length === 0) return res.send(info.slice(0, 9));
+      let obj = {
+        id,
+        title,
+        image,
+        diets,
+      };
 
-      return res.send(total.slice(0, 9));
-    } catch (error) {
-      res.send(error);
+      return info.push(obj);
+    });
+
+    let total = db_array.concat(info);
+
+    if (total.length === 0) {
+      console.log("no hay nada");
+      return res.send("No se encontraron coincidencias");
     }
+
+    if (db_array.length === 0) return res.send(info.slice(0, 9));
+
+    return res.send(total.slice(0, 9));
   }
 
   if (!name) {
-    try {
-      let info = [];
+    let info = [];
 
-      let responseApi = await axios(
-        `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=50`
-      );
+    let responseApi = await axios(
+      `${URL}complexSearch?addRecipeInformation=true&${API_KEY}&number=50`
+    );
 
-      responseApi.data.results.map((data) => {
-        const {
-          title,
-          diets,
-          image,
-          vegetarian,
-          id,
-          spoonacularScore,
-          healthScore,
-        } = data;
+    responseApi.data.results.map((data) => {
+      const {
+        title,
+        diets,
+        image,
+        vegetarian,
+        id,
+        spoonacularScore,
+        healthScore,
+      } = data;
 
-        if (vegetarian) {
-          let obj = {
-            id,
-            title,
-            image,
-            diets: [...diets, "vegeterian"],
-            spoonacularScore,
-            healthScore,
-          };
-
-          return info.push(obj);
-        }
-
+      if (vegetarian) {
         let obj = {
           id,
-          image,
           title,
-          diets,
+          image,
+          diets: [...diets, "vegeterian"],
           spoonacularScore,
           healthScore,
         };
 
         return info.push(obj);
-      });
+      }
 
-      return res.send(info);
-    } catch (error) {
-      res.send(error);
-    }
+      let obj = {
+        id,
+        image,
+        title,
+        diets,
+        spoonacularScore,
+        healthScore,
+      };
+
+      return info.push(obj);
+    });
+
+    return res.send(info);
   }
 });
 
@@ -227,96 +221,76 @@ router.get("/:idReceta", async (req, res) => {
   let entry = idReceta.length > 10;
 
   if (entry) {
-    try {
-      //let responseDb = await Recipe.findByPk({ idReceta });
+    //let responseDb = await Recipe.findByPk({ idReceta });
 
-      let info = [];
+    let info = [];
 
-      let responseDb = await Recipe.findByPk(idReceta, {
-        include: [
-          {
-            model: Diet,
-          },
-        ],
-      });
+    let responseDb = await Recipe.findByPk(idReceta, {
+      include: [
+        {
+          model: Diet,
+        },
+      ],
+    });
 
-      let array_diets = [];
+    let array_diets = [];
 
-      const {
-        title,
-        id,
-        summary,
-        Puntuation,
-        lvl_healthScore,
-        instructions,
-        image,
-        diets,
-      } = responseDb;
+    const {
+      title,
+      id,
+      summary,
+      Puntuation,
+      lvl_healthScore,
+      instructions,
+      image,
+      diets,
+    } = responseDb;
 
-      diets.map((e) => {
-        array_diets.push(e.dataValues.Name);
-      });
+    diets.map((e) => {
+      array_diets.push(e.dataValues.Name);
+    });
 
-      let obj = {
-        title,
-        id,
-        summary,
-        Puntuation,
-        lvl_healthScore,
-        instructions,
-        image,
-        diets: array_diets,
-      };
+    let obj = {
+      title,
+      id,
+      summary,
+      Puntuation,
+      lvl_healthScore,
+      instructions,
+      image,
+      diets: array_diets,
+    };
 
-      info.push(obj);
+    info.push(obj);
 
-      return res.send(info[0]);
-    } catch (error) {
-      res.send(error);
-    }
+    return res.send(info[0]);
   }
 
   if (!entry) {
-    try {
-      let responseApi = await axios(`${URL}${idReceta}/information?${API_KEY}`);
+    let responseApi = await axios(`${URL}${idReceta}/information?${API_KEY}`);
 
-      const {
-        id,
-        image,
-        title,
-        dishTypes,
-        diets,
-        summary,
-        spoonacularScore,
-        healthScore,
-        instructions,
-        vegetarian,
-      } = responseApi.data;
+    const {
+      id,
+      image,
+      title,
+      dishTypes,
+      diets,
+      summary,
+      spoonacularScore,
+      healthScore,
+      instructions,
+      vegetarian,
+    } = responseApi.data;
 
-      let id_conv = id.toString();
+    let id_conv = id.toString();
 
-      if (vegetarian) {
-        let infoDetail = {
-          id: id_conv,
-          image,
-          title,
-          dishTypes,
-          diets: [...diets, "vegeterian"],
-          summary,
-          Puntuation: spoonacularScore,
-          lvl_healthScore: healthScore,
-          instructions,
-        };
-
-        return res.send(infoDetail);
-      }
-
+    if (vegetarian) {
       let infoDetail = {
         id: id_conv,
         image,
         title,
         dishTypes,
-        diets,
+        diets: [...diets, "vegeterian"],
         summary,
         Puntuation: spoonacularScore,
         lvl_healthScore: healthScore,
@@ -324,9 +298,21 @@ router.get("/:idReceta", async (req, res) => {
       };
 
       return res.send(infoDetail);
-    } catch (error) {
-      res.send(error);
     }
+
+    let infoDetail = {
+      id: id_conv,
+      image,
+      title,
+      dishTypes,
+      diets,
+      summary,
+      Puntuation: spoonacularScore,
+      lvl_healthScore: healthScore,
+      instructions,
+    };
+
+    return res.send(infoDetail);
   }
 });
 
