@@ -19,7 +19,7 @@ function Search() {
       let value = refInput.current.value;
       refInput.current.value = "";
       let data = await axios(
-        `http://localhost:3001/recipes?name=${
+        `/recipes?name=${
           value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
         }`
       );
