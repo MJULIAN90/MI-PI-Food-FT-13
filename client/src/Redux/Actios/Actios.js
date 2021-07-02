@@ -13,7 +13,7 @@ export const GET_DIETS = async () => {
 export const ADDED_BY_USER_DB = () => {
   return async function (dispatch) {
     try {
-      let data = await axios("/creates");
+      let data = await axios("/recipes/creates");
       return dispatch({ type: "ADDED_BY_USER_DB", payload: data.data });
     } catch (error) {
       console.log(error);
