@@ -46,7 +46,7 @@ function AddRecipe() {
 
     try {
       await axios({
-        url: "http://localhost:3001/recipe",
+        url: "/recipe",
         method: "Post",
         data,
       });
