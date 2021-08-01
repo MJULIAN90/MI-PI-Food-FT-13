@@ -1,142 +1,105 @@
-.recipes {
+.contenedor {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   margin-right: 10%;
   margin-left: 10%;
 }
 
-.principal {
+.recipes {
   width: 80%;
-}
-
-.TypesDiets {
-  width: 20%;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
   display: flex;
   flex-direction: column;
 }
 
-.TypesDiets button {
-  margin: 15px 5px 5px 5px;
-  border-radius: 10px;
-  height: 35px;
-  border: none;
-  background-color: #cfffca;
-  color: black bold;
-  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
-  font-size: 0.8rem;
-  font-weight: bold;
+.filters {
+  margin-top: 0.5%;
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  margin-bottom: 0.5%;
+  align-content: center;
 }
 
-.TypesDiets button:hover {
+.filters button,
+h3 {
+  display: flex;
   background-color: white;
-  color: #5dc460;
+  border: none;
+  border-radius: 10px;
+  color: #ff4720;
+  font-size: 1rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.filters button:hover,
+h3:hover {
+  background-color: #ff4720;
+  color: white;
+}
+
+.filters h3 {
+  padding: 2%;
+  cursor: pointer;
+  box-shadow: 1px -1px 13px 4px rgba(0, 0, 0, 0.93);
 }
 
 .recipeCreate {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 5px;
-
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 1%;
   text-align: center;
 }
 
-.filters {
-  display: flex;
-  padding: 10px;
-  border: black 1 px solid;
-  margin: 0 15px 0 15px;
-  justify-content: space-evenly;
-}
-
-.filters button {
-  margin: 4px;
-  border-radius: 10px;
-  height: 35px;
-  border: none;
-  background-color: #cfffca;
-  color: black bold;
-  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
-  font-size: 1.1vh;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.filters button:hover {
+.recipeCard {
   background-color: white;
-  color: #5dc460;
+  box-shadow: rgb(0 0 0 / 61%) 0px 1px 4px -2px;
+  margin: 2%;
+  border-radius: 5px;
+}
+.recipeCard:hover {
+  box-shadow: 1px -1px 13px 4px rgba(0, 0, 0, 0.93);
+}
+
+.img_diets {
+  padding: 1%;
+}
+
+.text_diets {
+  text-transform: capitalize;
+  font: 0.9rem futura-book;
+  margin-bottom: 1%;
+}
+
+.titulo {
+  font: 0.9rem futura-book;
+}
+
+.links {
+  text-decoration: none;
+  color: #000000;
+}
+.links:hover {
+  color: #ff4720;
 }
 
 .botones {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 10px 10px 10px;
+  margin-bottom: 5%;
 }
-
 .botones button {
   background-color: white;
   border: none;
-  color: #5dc460;
+  color: #ff4720;
   font-size: 1.5rem;
   font-weight: bold;
   margin: 10px 10px 10px 10px;
 }
-
 .botones button:hover {
-  color: #ff4720;
-  text-shadow: 5px 7px 12px #000000;
-}
-
-.recipeCard:hover {
-  background-color: #a5eea0;
-}
-
-.recipeCard {
-  background-color: #5dc460;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  margin: 10px;
-}
-
-.contenido {
-  display: flex;
-}
-
-.text_diets {
-  margin-left: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-transform: capitalize;
-}
-
-.text_diets:hover {
-  color: #ff4720;
-  font-weight: bold;
-}
-
-.img_diets {
-  padding: 25px;
-  display: flex;
-  align-items: center;
-}
-
-.img_diets img {
-  box-shadow: 1px -1px 13px 4px rgba(0, 0, 0, 0.93);
-}
-.titulo h3:hover {
-  color: #ff4720;
-  text-decoration: none;
-  outline: none;
-}
-
-.links {
-  text-decoration: none;
-  color: #000000;
+  background-color: #ff4720;
+  color: white;
 }

@@ -1,0 +1,19 @@
+.container {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.links {
+  text-decoration: none;
+  color: #000000;
+}
+.links:hover {
+  color: #ff4720;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ff4720;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { DELETE_SEARCHED } from "../../Redux/Actios/Actios";
+import "./Search_css/Searched.css";
 
 function Searched() {
   const state = useSelector((state) => state.searched);
@@ -14,34 +15,34 @@ function Searched() {
   }
 
   return (
-    <div>
+    <div className="container">
       <div>
         {state?.length > 0 ? (
           <div className="recipeCreate">
             {state.map((data) => (
               <div key={data.id} className="recipeCard">
-                <div className="titulo">
-                  <Link to={`/Home/DetailSearch/${data.id}`}>
-                    <h3>{data.title}</h3>
-                  </Link>
-                </div>
-                <div className="contenido">
-                  <div className="img_diets">
-                    <img
-                      src={data.image}
-                      alt="error cargando"
-                      width="120"
-                      height="120"
-                    />{" "}
+                <Link to={`/Home/DetailSearch/${data.id}`} className="links">
+                  <div className="titulo">
+                    <h1>{data.title}</h1>
                   </div>
+                  <div className="contenido">
+                    <div className="img_diets">
+                      <img
+                        src={data.image}
+                        alt="error cargando"
+                        width="100%  "
+                        height="100%"
+                      />{" "}
+                    </div>
 
-                  <div className="text_diets">
-                    {"Diets:"}
-                    {data.diets.map((e, i) => (
-                      <div key={i}>{e}</div>
-                    ))}
+                    <div className="text_diets">
+                      {"Diets:"}
+                      {data.diets.map((e, i) => (
+                        <div key={i}>{e}</div>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             ))}
           </div>

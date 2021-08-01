@@ -1,20 +1,28 @@
 .addRecipe {
   display: flex;
   justify-content: center;
-  background-color: #5dc460;
+  background-color: white;
   margin-left: 35%;
   margin-right: 35%;
   font-weight: bold;
   text-transform: uppercase;
-  color: white;
+  color: #ff4720;
+  border-radius: 20px;
+  background-image: url("https://thumbs.dreamstime.com/z/coj%C3%ADn-vac%C3%ADo-para-una-lista-de-ingredientes-en-la-tabla-madera-blanca-116148444.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.formulario h2 {
+  margin-top: 10%;
+  margin-bottom: 5%;
+  text-align: center;
+  text-shadow: 2px 2px black;
 }
 
 .formulario div {
   margin: 8px;
-}
-
-.formulario h2 {
-  text-align: center;
 }
 
 .formulario ul {
@@ -30,11 +38,15 @@
   width: 300px;
   height: 30px;
   border-radius: 5px;
-  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-color: #ff4720;
+  background-color: transparent;
 }
 
 .inputs:hover {
-  background-color: #e3e4e5;
+  background-color: #edf0f3;
 }
 
 .form_inputs {
@@ -44,12 +56,16 @@
 
 .textarea {
   width: 300px;
-  border: none;
   border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-color: #ff4720;
+  background-color: transparent;
 }
 
 .textarea:hover {
-  background-color: #e3e4e5;
+  background-color: #edf0f3;
 }
 
 .add_button {
@@ -70,14 +86,20 @@
   border: #ff4720;
 }
 
+.dieta1 {
+  color: #ff4720;
+}
+
 .dieta2 {
-  color: white;
+  color: black;
 }
 
 .dieta2:hover {
   color: #ff4720;
 }
 
-.dieta1 {
-  color: #ff4720;
+label {
+  text-shadow: 1px 1px black;
+  font-size: 1.3rem;
+  font-weight: bold;
 }

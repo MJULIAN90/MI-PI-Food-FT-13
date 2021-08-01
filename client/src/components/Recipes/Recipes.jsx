@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Swal from "sweetalert2";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -42,14 +42,20 @@ function Recipes() {
   const paginationRecipes = () => {
     if (entry_to_filter !== "") {
       if (data_cache.length > 0)
-        return data_cache.slice(pagination, pagination + 10);
+        return data_cache.slice(pagination, pagination + 9);
 
       if (data_cache.length === 0) {
         setentry_to_filter("");
-        alert("NO SE ENCONTRARON RECETAS CON ESTA DIETA");
+        Swal.fire({
+          title: "NO SE ENCONTRARON RECETAS CON ESTA DIETA",
+          icon: "error",
+          confirmButtonText: "Ok",
+          background: "white",
+          confirmButtonColor: "#ff4720",
+        });
       }
     }
-    return data.slice(pagination, pagination + 10);
+    return data.slice(pagination, pagination + 9);
   };
 
   const filters = (e) => {
@@ -149,11 +155,11 @@ function Recipes() {
   };
 
   const nextPage = () => {
-    if (pagination < 40) setpagination(pagination + 10);
+    if (pagination < 45) setpagination(pagination + 9);
   };
 
   const prevPage = () => {
-    if (pagination > 0) setpagination(pagination - 10);
+    if (pagination > 0) setpagination(pagination - 9);
   };
 
   const resetFilter = () => {
@@ -167,13 +173,13 @@ function Recipes() {
       case "1":
         return setpagination(0);
       case "2":
-        return setpagination(10);
+        return setpagination(9);
       case "3":
-        return setpagination(20);
+        return setpagination(18);
       case "4":
-        return setpagination(30);
+        return setpagination(27);
       case "5":
-        return setpagination(40);
+        return setpagination(36);
 
       default:
         break;
@@ -192,39 +198,84 @@ function Recipes() {
 
   prueba();
 
+  const [ordenando, setOrdenando] = useState(true);
+
   return (
-    <div className="recipes">
-      <div className="principal">
-        <div className="filters">
-          <button type="button" id="ordAsc" onClick={filters}>
-            {"Ordenar asc alfabetico "}
-          </button>
-          <button type="button" id="ordDes" onClick={filters}>
-            {"Ordenar desc alfabetico"}
-          </button>
-          <button type="button" id="ordScore" onClick={filters}>
-            {"Ordenar x SCORE"}
-          </button>
-          <button type="button" onClick={resetFilter}>
-            {"Reset Filtros"}
-          </button>
-        </div>
+    <div className="contenedor">
+      <div className="filters">
+        {ordenando ? (
+          <h3 onClick={() => setOrdenando(!ordenando)}>FILTRAR POR ... </h3>
+        ) : (
+          <div>
+            <h3 onClick={() => setOrdenando(!ordenando)}>FILTRAR POR ... </h3>
+            <button type="button" id="ordAsc" onClick={filters}>
+              {"alfabeticamente ⇑"}
+            </button>
+            <button type="button" id="ordDes" onClick={filters}>
+              {"alfabeticamente ⇓"}
+            </button>
+            <button type="button" id="ordScore" onClick={filters}>
+              {" score"}
+            </button>
+
+            <button type="button" onClick={filters} id="d1">
+              {"GLUTEN FREE "}
+            </button>
+            <button type="button" onClick={filters} id="d2">
+              {"KETOGENIC "}
+            </button>
+            <button type="button" onClick={filters} id="d3">
+              {"VEGETARIAN "}
+            </button>
+            <button type="button" onClick={filters} id="d4">
+              {"LACTO VEGETARIAN "}
+            </button>
+            <button type="button" onClick={filters} id="d5">
+              {"OVO VEGETARIAN "}
+            </button>
+            <button type="button" onClick={filters} id="d6">
+              {"VEGAN"}
+            </button>
+            <button type="button" onClick={filters} id="d7">
+              {"PESCETARIAN "}
+            </button>
+            <button type="button" onClick={filters} id="d8">
+              {"PALEO "}
+            </button>
+            <button type="button" onClick={filters} id="d9">
+              {"PRIMAL"}
+            </button>
+            <button type="button" onClick={filters} id="d10">
+              {"WHOLE30 "}
+            </button>
+            <button type="button" onClick={filters} id="d11">
+              {"DAIRY FREE "}
+            </button>
+            <button type="button" onClick={filters} id="d12">
+              {"PALEOLITHIC"}
+            </button>
+            <button type="button" onClick={resetFilter}>
+              {"Reset Filtros"}
+            </button>
+          </div>
+        )}
+      </div>
+      <div className="recipes">
         <div className="recipeCreate">
           {paginationRecipes().map((data) => (
             <div key={data.id} className="recipeCard">
-              <div className="titulo">
-                <Link to={`/Home/Details/${data.id}`} className="links">
-                  <h3>{data.title}</h3>
-                </Link>
-              </div>
-              <div className="contenido">
+              <Link to={`/Home/Details/${data.id}`} className="links">
                 <div className="img_diets">
                   <img
                     src={data.image}
                     alt="error cargando"
-                    width="120"
-                    height="120"
+                    width="100%  "
+                    height="100%"
                   />{" "}
+                </div>
+
+                <div className="titulo">
+                  <h2>{data.title}</h2>
                 </div>
 
                 <div className="text_diets">
@@ -233,11 +284,10 @@ function Recipes() {
                     <div key={i}>{e}</div>
                   ))}
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>
-
         <div className="botones ">
           {cache_data.length <= 0 ? (
             <>
@@ -260,6 +310,10 @@ function Recipes() {
                 {"5"}
               </button>
 
+              <button type="button" onClick={botones} id="5">
+                {"6"}
+              </button>
+
               <button type="button" onClick={nextPage}>
                 {">>"}
               </button>
@@ -274,44 +328,6 @@ function Recipes() {
             </div>
           )}
         </div>
-      </div>
-      <div className="TypesDiets">
-        <button type="button" onClick={filters} id="d1">
-          {"GLUTEN FREE "}
-        </button>
-        <button type="button" onClick={filters} id="d2">
-          {"KETOGENIC "}
-        </button>
-        <button type="button" onClick={filters} id="d3">
-          {"VEGETARIAN "}
-        </button>
-        <button type="button" onClick={filters} id="d4">
-          {"LACTO VEGETARIAN "}
-        </button>
-        <button type="button" onClick={filters} id="d5">
-          {"OVO VEGETARIAN "}
-        </button>
-        <button type="button" onClick={filters} id="d6">
-          {"VEGAN"}
-        </button>
-        <button type="button" onClick={filters} id="d7">
-          {"PESCETARIAN "}
-        </button>
-        <button type="button" onClick={filters} id="d8">
-          {"PALEO "}
-        </button>
-        <button type="button" onClick={filters} id="d9">
-          {"PRIMAL"}
-        </button>
-        <button type="button" onClick={filters} id="d10">
-          {"WHOLE30 "}
-        </button>
-        <button type="button" onClick={filters} id="d11">
-          {"DAIRY FREE "}
-        </button>
-        <button type="button" onClick={filters} id="d12">
-          {"PALEOLITHIC"}
-        </button>
       </div>
     </div>
   );

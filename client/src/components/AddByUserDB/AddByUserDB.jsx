@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADDED_BY_USER_DB } from "../../Redux/Actios/Actios";
 import { Link, useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./AddByUserDB.css";
 
 function AddByUserDb() {
@@ -18,40 +19,51 @@ function AddByUserDb() {
     history.push("/Home");
   }
 
+  let vacio = () => {
+    Swal.fire({
+      title: "NO SE ENCONTRARON RECETAS EN LA BASE DE DATOS",
+      icon: "error",
+      confirmButtonText: "Ok",
+      background: "white",
+      confirmButtonColor: "#ff4720",
+    });
+    volver();
+  };
+
   return (
-    <div className="dbCreates">
-      {state.length > 0 ? (
-        state.map((data) => (
-          <div key={data.id} className="recipeCard">
-            <div className="titulo">
-              <Link to={`/Home/Details/${data.id}`}>
-                <h3>{data.title}</h3>
+    <div>
+      <div className="dbCreates">
+        {state.length > 0 ? (
+          state.map((data) => (
+            <div key={data.id} className="recipeCard">
+              <Link to={`/Home/Details/${data.id}`} className="links">
+                <div className="img_diets">
+                  <img
+                    src={data.image}
+                    alt="error cargando"
+                    width="300px  "
+                    height="200px"
+                  />
+                </div>
+
+                <div className="titulo">
+                  <h2>{data.title}</h2>
+                </div>
+
+                <div className="text_diets">
+                  {"Diets:"}
+                  {data.diets.map((e, i) => (
+                    <div key={i}>{e}</div>
+                  ))}
+                </div>
               </Link>
             </div>
-            <div className="contenido">
-              <div className="img_diets">
-                <img
-                  src={data.image}
-                  alt="error cargando"
-                  width="200"
-                  height="200"
-                />{" "}
-              </div>
+          ))
+        ) : (
+          <>{vacio()}</>
+        )}
+      </div>
 
-              <div className="text_diets">
-                {"Diets:"}
-                {data.diets.map((e, i) => (
-                  <div key={i}>{e}</div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))
-      ) : (
-        <>
-          <h1>NO SE ENCONTRARON RECETAS EN LA BASE DE DATOS</h1>
-        </>
-      )}
       <button type="button" onClick={volver} className="volver">
         Volver
       </button>

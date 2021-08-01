@@ -1,9 +1,7 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Search from "../Search/Search";
 import "./NavBar.css";
-
-import img from "../../Images/logo2.png";
 
 function NavBar() {
   const history = useHistory();
@@ -26,24 +24,17 @@ function NavBar() {
 
   return (
     <div className="NavBar">
+      <div className="logo"></div>
       <div className="menu">
         <div className="rutas">
-          <button onClick={home}> Home</button>
-
+          <button onClick={home}> Inicio</button>
           <button onClick={recetas}> Mis recetas </button>
-
           <button onClick={favoritos}> Mis favoritos </button>
-
           <button onClick={agregar}> Agregar Receta </button>
         </div>
-        <div>
-          <Link to="/">
-            <img src={img} alt="error cargando" className="logo" />
-          </Link>
-        </div>
 
-        <div className="rutas">
-          <Search />{" "}
+        <div>
+          <Search />
         </div>
       </div>
     </div>

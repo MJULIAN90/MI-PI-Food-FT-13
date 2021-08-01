@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { ADDED_BY_USER_DB } from "../../Redux/Actios/Actios";
+import Swal from "sweetalert2";
 import "./AddRecipe.css";
 
 function AddRecipe() {
@@ -51,10 +52,23 @@ function AddRecipe() {
         data,
       });
 
-      alert(`PLATO ${food.title} HA SIDO CREADO`);
+      Swal.fire({
+        title: `PLATO ${food.title} HA SIDO CREADO`,
+        icon: "success",
+        confirmButtonText: "Ok",
+        background: "white",
+        confirmButtonColor: "#ff4720",
+      });
+
       if (volver) history.push("/Home");
     } catch (err) {
-      alert("ERROR AL CREAR ");
+      Swal.fire({
+        title: "ERROR AL CREAR",
+        icon: "error",
+        confirmButtonText: "Ok",
+        background: "white",
+        confirmButtonColor: "#ff4720",
+      });
     }
 
     setfood({
@@ -86,7 +100,6 @@ function AddRecipe() {
             name="title"
             type="text"
             value={food.title}
-            placeholder="Ingresa Nombre "
             onChange={handleOnchange}
             required
           />
@@ -100,7 +113,6 @@ function AddRecipe() {
             rows="10"
             cols="50"
             value={food.summary}
-            placeholder="Ingresa Resumen"
             onChange={handleOnchange}
             required
           />
@@ -114,7 +126,7 @@ function AddRecipe() {
             max="10"
             min="1"
             value={food.Puntuation}
-            placeholder="Ingresa Puntuacion Del PLato 1 a 10"
+            placeholder="Puntuacion Del 1 a 10"
             onChange={handleOnchange}
             required
           />
@@ -128,7 +140,7 @@ function AddRecipe() {
             max="100"
             min="1"
             value={food.lvl_healthScore}
-            placeholder="Nivel de comida saludable de 1 a 100"
+            placeholder="Calificacion de 1 a 100"
             onChange={handleOnchange}
             required
           />
@@ -142,7 +154,6 @@ function AddRecipe() {
             rows="10"
             cols="15"
             value={food.instructions}
-            placeholder="Paso a paso"
             onChange={handleOnchange}
             required
           />
@@ -155,7 +166,6 @@ function AddRecipe() {
             type="url"
             name="image"
             value={food.image}
-            placeholder="Url"
             onChange={handleOnchange}
             required
           />

@@ -24,19 +24,28 @@ function Favorites() {
           {state.map((data) => (
             <div key={data.id} className="recipeCard">
               <div className="titulo">
-                <Link to={`/Home/Details/${data.id}`}>
-                  <h3>{data.title}</h3>
-                </Link>
+                <h3>{data.title}</h3>
               </div>
+
               <div className="contenido">
                 <div className="img_diets">
                   <img
                     src={data.image}
                     alt="error cargando"
-                    width="120"
-                    height="120"
+                    width="100%"
+                    height="100%"
                   />{" "}
                 </div>
+
+                <div className="opciones">
+                  <Link to={`/Home/Details/${data.id}`} className="links">
+                    <button> VER DETALLES</button>
+                  </Link>
+                  <button type="button" id={data.id} onClick={remove_favorite}>
+                    {"ELIMINAR FAVORITO"}
+                  </button>
+                </div>
+
                 <div className="text_diets">
                   {"Diets:"}
                   {data.diets.map((e, i) => (
@@ -44,15 +53,6 @@ function Favorites() {
                   ))}
                 </div>
               </div>
-              <button
-                type="button"
-                id={data.id}
-                onClick={remove_favorite}
-                className=""
-              >
-                {" "}
-                ELIMINAR FAVORITO
-              </button>
             </div>
           ))}
         </div>

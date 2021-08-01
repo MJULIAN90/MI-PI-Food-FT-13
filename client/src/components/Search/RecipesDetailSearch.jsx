@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_FAVORITES, GET_BY_ID } from "../../Redux/Actios/Actios";
+import Swal from "sweetalert2";
 
-//falta organizar lo de tipos de dietas
 function RecipesDetailSearch(props) {
   const state = useSelector((state) => state);
+
   let history = useHistory();
 
   const dispatch = useDispatch();
@@ -27,10 +28,21 @@ function RecipesDetailSearch(props) {
 
     if (!info_repeat) {
       dispatch(ADD_FAVORITES(recipe_id));
-      return alert("AGREGADO A FAVORITOS");
+      return Swal.fire({
+        title: "AGREGADO A FAVORITOS",
+        icon: "success",
+        confirmButtonText: "OK",
+        background: "white",
+        confirmButtonColor: "#ff4720",
+      });
     }
-
-    return alert("YA SE ENCUENTRA EN FAVORITOS");
+    return Swal.fire({
+      title: "YA SE ENCUENTRA EN FAVORITOS",
+      icon: "error",
+      confirmButtonText: "Ok",
+      background: "white",
+      confirmButtonColor: "#ff4720",
+    });
   };
 
   function volverSearch() {
@@ -41,8 +53,7 @@ function RecipesDetailSearch(props) {
     <div className="idRecipes">
       {recipe_id ? (
         <div className="id_text">
-          <br />
-          <h2>{recipe_id.title}</h2>
+          <h1>{recipe_id.title}</h1>
           <div className="img_diets">
             <img
               src={recipe_id.image}
@@ -51,14 +62,14 @@ function RecipesDetailSearch(props) {
             />
           </div>
 
-          <h3>TIPOS DE PLATOS: </h3>
+          <div className="subtitle">TIPOS DE PLATOS: </div>
           <ul>
             {recipe_id?.dishTypes?.map((e, i) => (
               <li key={i}>{e} </li>
             ))}
           </ul>
 
-          <h3>TIPOS DE DIETAS:</h3>
+          <div className="subtitle">TIPOS DE DIETAS:</div>
           <div>
             <ul>
               {recipe_id.diets.map((e, i) => (
@@ -66,22 +77,33 @@ function RecipesDetailSearch(props) {
               ))}
             </ul>
           </div>
-          <h3>RESUMEN :</h3>
-          <p>{recipe_id.summary}</p>
-          <h3>PUNTUACION : {recipe_id.Puntuation}</h3>
-          <h3>NIVEL DE COMIDA SALUDABLE : {recipe_id.lvl_healthScore}</h3>
-          <h3>PASO A PASO :</h3>
-          <p>{recipe_id.instructions} </p>
+          <div className="subtitle">RESUMEN :</div>
+          <div className="text_p">{recipe_id.summary}</div>
+
+          <div className="subtitle">PUNTUACION : </div>
+          <div className="text">{recipe_id.Puntuation}</div>
+
+          <div className="subtitle">NIVEL DE COMIDA SALUDABLE :</div>
+          <div className="text">{recipe_id.lvl_healthScore}</div>
+
+          {recipe_id.instructions && (
+            <div>
+              <div className="subtitle">PASO A PASO :</div>
+              <div className="text">{recipe_id.instructions}</div>
+            </div>
+          )}
         </div>
       ) : (
         <h1>Cargando ...</h1>
       )}
-      <button type="button" onClick={Add_favorite} className="add_button">
-        {"AGREGAR A FAVORITOS"}
-      </button>
-      <button type="button" onClick={volverSearch} className="add_button">
-        VOLVER A BUSQUEDA
-      </button>
+      <div className="botones_recipes">
+        <button type="button" onClick={Add_favorite} className="add_button">
+          {"AGREGAR A FAVORITOS"}
+        </button>
+        <button type="button" onClick={volverSearch} className="add_button">
+          VOLVER A BUSQUEDA
+        </button>
+      </div>
     </div>
   );
 }
