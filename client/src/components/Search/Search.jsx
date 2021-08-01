@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { SEARCHED } from "../../Redux/Actios/Actios";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./Search_css/Search.css";
 
 //? pendiente crear las actios para poder enviar al reducers.
@@ -30,15 +31,28 @@ function Search() {
         return history.push("/Home/Search");
       }
       if (data.data === "No se encontraron coincidencias") {
-        alert("Receta no encontrada");
+        Swal.fire({
+          title: "RECETA NO ENCONTRADA",
+          icon: "error",
+          confirmButtonText: "Ok",
+          background: "white",
+          confirmButtonColor: "#ff4720",
+        });
         return history.push("/Home");
       }
     }
-    alert("Ingresa un valor para la busqueda");
+    Swal.fire({
+      title: "Ingresa un valor para la busqueda",
+      icon: "error",
+      confirmButtonText: "Ok",
+      background: "white",
+      confirmButtonColor: "#ff4720",
+    });
+
     return history.push("/Home");
   }
   return (
-    <div>
+    <div className="search">
       <form onSubmit={handleSumit}>
         <input
           className="buscador"
