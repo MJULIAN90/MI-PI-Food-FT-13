@@ -27,7 +27,7 @@ function AddByUserDb() {
       background: "white",
       confirmButtonColor: "#ff4720",
     });
-    volver();
+    return history.push("/home");
   };
 
   return (
