@@ -2,6 +2,9 @@
 <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcasapropiacolombia.com%2Fsites%2Fdefault%2Ffiles%2F2019-12%2F3_0.jpg&f=1&nofb=1" alt="c" width="1000" height="300"/>
 
 
+Link: https://mi-pi-food-ft-13-mjulian90.vercel.app/
+
+
 Realizar una aplicación en la cual se puedan ver los distintas recetas disponibles junto con sus detalles más relevantes utilizando la api externa https://spoonacular.com/food-api y a partir de ella poder:
 
 Buscar recetas, filtrarlas por genero, acceder a sus detalles, ordenarlos alfabeticamente y por sus tipos de dietas, además crear nuevas recetas en una base de datos local.
